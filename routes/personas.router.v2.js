@@ -52,7 +52,7 @@ router.post('/', (req, res) => {
 });
 
 
-// update partial persona
+// update partial persona v2
 router.patch('/:id', (req, res) => {
   const { id } = req.params;
   const body = req.body;
