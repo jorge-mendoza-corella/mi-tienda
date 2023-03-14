@@ -56,10 +56,10 @@ router.post('/', (req, res) => {
 router.patch('/:id', (req, res) => {
   const { id } = req.params;
   const body = req.body;
+  const persona = service.update(id,body);
   res.json({
     message: 'Actualizado solo unos campos',
-    id: id,
-    data: body
+    persona
   })
 });
 
@@ -67,10 +67,10 @@ router.patch('/:id', (req, res) => {
 router.put('/:id', (req, res) => {
   const { id } = req.params;
   const body = req.body;
+  const persona = service.update(id,body);
   res.json({
     message: 'Actualizado completo',
-    id: id,
-    data: body
+    persona
   })
 });
 

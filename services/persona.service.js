@@ -19,8 +19,13 @@ class PersonaService {
     }
   }
 
-  create() {
-
+  create(data) {
+    const nuevaPersona = {
+      id: faker.datatype.uuid(),
+      ...data
+    }
+    this.personas.push(nuevaPersona);
+    return nuevaPersona;
   }
 
   find() {
@@ -31,12 +36,29 @@ class PersonaService {
     return this.personas.find(item => item.id === id);
   }
 
-  update() {
+  update(id, cambios) {
+    const index = this.personas.findIndex(item => item.id === id);
+    if (index === -1) {
+      throw new Error('Hubo un error');
+    }
+    const persona = this.personas[index];
+    this.personas[index] =
+    {
+      ...persona,
+      ...cambios
+    }
 
+    return this.personas[index];
   }
 
-  delete() {
-this.personas
+  delete(id) {
+    const index = this.personas.findIndex(item => item.id === id);
+    if (index === -1) {
+      throw new Error('Hubo un error');
+    }
+
+    this.personas.splice(index, 1);
+    return { id }
   }
 
 
