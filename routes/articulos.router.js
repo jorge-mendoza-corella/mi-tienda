@@ -5,12 +5,10 @@ const varias = require('../utilities/varias');
 // genero un router
 const router = express.Router();
 
-// instancio el servicio
-const service = new ArticuloService();
-
 // regresa los elementos especificos dependiendo de los filtros como query(?)
 router.get('/', async (req, res) => {
-  const articulos = await service.find();
+  const articuloService = await ArticuloService.getInstance();
+  const articulos = await articuloService.find();
   if (articulos.length == 0)
     return res.status(404).json({
       message: 'No hay articulos'
@@ -29,7 +27,8 @@ router.get('/filtro', async (req, res) => {
 // regresa el elemento especifico, dependiendo del filtro(especifico)
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
-  const articulo = await service.findOne(id);
+  const articuloService = await ArticuloService.getInstance();
+  const articulo = await articuloService.findOne(id);
   if (!articulo)
     return res.status(404).json({
       message: 'Articulo no encontrado'
@@ -42,7 +41,8 @@ router.get('/:id', async (req, res) => {
 // crea articulo
 router.post('/', async (req, res) => {
   const articulo = req.body;
-  await service.create(articulo);
+  const articuloService = await ArticuloService.getInstance();
+  await articuloService.create(articulo);
   res.status(201).json({
     message: 'Creado',
     articulo: articulo
@@ -56,7 +56,8 @@ router.patch('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const body = req.body;
-    const articulo = await service.update(id, body);
+    const articuloService = await ArticuloService.getInstance();
+    const articulo = await articuloService.update(id, body);
     res.json({
       message: 'Actualizado solo unos campos',
       articulo
@@ -73,7 +74,8 @@ router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const body = req.body;
-    const articulo = await service.update(id, body);
+    const articuloService = await ArticuloService.getInstance();
+    const articulo = await articuloService.update(id, body);
     res.json({
       message: 'Actualizado completo',
       articulo
@@ -89,7 +91,8 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const articulo = await service.delete(id);
+    const articuloService = await ArticuloService.getInstance();
+    const articulo = await articuloService.delete(id);
     res.json({
       message: 'Borrado',
       articulo: articulo

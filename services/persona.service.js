@@ -2,6 +2,15 @@ const faker = require('faker');
 
 class PersonaService {
 
+  static _personasServiceInstance = null;
+
+  static getInstance() {
+    if (PersonaService._personasServiceInstance === null) {
+      PersonaService._personasServiceInstance = new PersonaService();
+    }
+    return PersonaService._personasServiceInstance;
+  }
+
   constructor() {
     this.personas = [];
     this.generate();

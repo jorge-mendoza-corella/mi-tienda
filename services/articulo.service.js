@@ -2,6 +2,17 @@ const faker = require('faker');
 
 class ArticuloService {
 
+
+  static _articulosServiceInstance = null;
+
+  static getInstance() {
+    if (ArticuloService._articulosServiceInstance === null) {
+      ArticuloService._articulosServiceInstance = new ArticuloService();
+    }
+    return ArticuloService._articulosServiceInstance;
+  }
+
+
   constructor() {
     this.articulos = [];
     this.generate();

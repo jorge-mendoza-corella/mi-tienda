@@ -6,12 +6,10 @@ const varias = require('../utilities/varias');
 // genero un router
 const router = express.Router();
 
-// instancio el servicio
-const service = new PersonaService();
-
 // regresa los elementos especificos dependiendo de los filtros como query(?)
 router.get('/', async (req, res) => {
-  const personas = await service.find();
+  const personaService = await PersonaService.getInstance();
+  const personas = await personaService.find();
   if (personas.length == 0)
     return res.status(404).json({
       message: 'No hay personas'
@@ -40,7 +38,8 @@ router.get('/filtro', async (req, res) => {
 // regresa el elemento especifico, dependiendo del filtro(especifico)
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
-  const persona = await service.findOne(id);
+  const personaService = await PersonaService.getInstance();
+  const persona = await personaService.findOne(id);
   if (!persona)
     return res.status(404).json({
       message: 'Persona no encontrada'
@@ -52,7 +51,8 @@ router.get('/:id', async (req, res) => {
 // crea persona
 router.post('/', async (req, res) => {
   const persona = req.body;
-  await service.create(persona);
+  const personaService = await PersonaService.getInstance();
+  await personaService.create(persona);
   res.status(201).json({
     message: 'Creado',
     persona: persona
@@ -66,7 +66,8 @@ router.patch('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const body = req.body;
-    const persona = await service.update(id, body);
+    const personaService = await PersonaService.getInstance();
+    const persona = await personaService.update(id, body);
     res.json({
       message: 'Actualizado solo unos campos',
       persona
@@ -83,7 +84,8 @@ router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const body = req.body;
-    const persona = await service.update(id, body);
+    const personaService = await PersonaService.getInstance();
+    const persona = await personaService.update(id, body);
     res.json({
       message: 'Actualizado completo',
       persona
@@ -99,7 +101,8 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const persona = await service.delete(id);
+    const personaService = await PersonaService.getInstance();
+    const persona = await personaService.delete(id);
     res.json({
       message: 'Borrado',
       persona: persona
