@@ -1,6 +1,5 @@
 const express = require('express');
 const ArticuloService = require('../services/articulo.service');
-const varias = require('../utilities/varias');
 
 // genero un router
 const router = express.Router();
@@ -25,34 +24,39 @@ router.get('/filtro', async (req, res) => {
 
 
 // regresa el elemento especifico, dependiendo del filtro(especifico)
-router.get('/:id', async (req, res) => {
-  const { id } = req.params;
-  const articuloService = await ArticuloService.getInstance();
-  const articulo = await articuloService.findOne(id);
-  if (!articulo)
-    return res.status(404).json({
-      message: 'Articulo no encontrado'
-    })
+router.get('/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const articuloService = await ArticuloService.getInstance();
+    const articulo = await articuloService.findOne(id);
+    res.json(articulo);
+  } catch (error) {
+    next(error);
+  }
 
-  res.json(articulo);
 });
 
 
 // crea articulo
-router.post('/', async (req, res) => {
-  const articulo = req.body;
-  const articuloService = await ArticuloService.getInstance();
-  await articuloService.create(articulo);
-  res.status(201).json({
-    message: 'Creado',
-    articulo: articulo
-  })
+router.post('/', async (req, res, next) => {
+  try {
+    const articulo = req.body;
+    const articuloService = await ArticuloService.getInstance();
+    await articuloService.create(articulo);
+    res.status(201).json({
+      message: 'Creado',
+      articulo: articulo
+    })
+  } catch (error) {
+    next(error);
+  }
+
 
 });
 
 
 // update partial articulo
-router.patch('/:id', async (req, res) => {
+router.patch('/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
     const body = req.body;
@@ -63,14 +67,12 @@ router.patch('/:id', async (req, res) => {
       articulo
     });
   } catch (error) {
-    res.status(404).json({
-      message: 'Articulo no encontrado, error en: ' + varias.errorFunctionName(error)
-    });
+    next(error);
   }
 });
 
 // update articulo
-router.put('/:id', async (req, res) => {
+router.put('/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
     const body = req.body;
@@ -81,9 +83,7 @@ router.put('/:id', async (req, res) => {
       articulo
     })
   } catch (error) {
-    res.status(404).json({
-      message: 'Articulo no encontrado, error en: ' + varias.errorFunctionName(error)
-    });
+    next(error);
   }
 });
 
@@ -98,9 +98,7 @@ router.delete('/:id', async (req, res) => {
       articulo: articulo
     })
   } catch (error) {
-    res.status(404).json({
-      message: 'Articulo no encontrado, error en: ' + varias.errorFunctionName(error)
-    });
+    next(error);
   }
 });
 

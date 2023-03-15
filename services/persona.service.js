@@ -1,4 +1,5 @@
 const faker = require('faker');
+const boom = require('@hapi/boom');
 
 class PersonaService {
 
@@ -42,14 +43,17 @@ class PersonaService {
   }
 
   async findOne(id) {
-    this.getT();
-    return this.personas.find(item => item.id === id);
+      const persona = this.personas.find(item => item.id === id);
+      if(!persona){
+        throw boom.notFound('Persona no encontrada');
+      }
+      return persona;
   }
 
   async update(id, cambios) {
     const index = this.personas.findIndex(item => item.id === id);
     if (index === -1) {
-      throw new Error('Hubo un error');
+      throw boom.notFound('Persona no encontrada');
     }
     const persona = this.personas[index];
     this.personas[index] =
@@ -64,7 +68,7 @@ class PersonaService {
   async delete(id) {
     const index = this.personas.findIndex(item => item.id === id);
     if (index === -1) {
-      throw new Error("Hubo un error");
+      throw boom.notFound('Persona no encontrada');
     }
     this.personas.splice(index, 1);
     return { id }

@@ -1,6 +1,6 @@
 const express = require('express');
 const PersonaService = require('../services/persona.service');
-const varias = require('../utilities/varias');
+
 // esta es la version 2 de este router, voy a hacerle cambios para que se tengan las dos versiones por un tiempo
 
 // genero un router
@@ -41,10 +41,6 @@ router.get('/:id', async (req, res, next) => {
     const { id } = req.params;
     const personaService = await PersonaService.getInstance();
     const persona = await personaService.findOne(id);
-    if (!persona)
-      return res.status(404).json({
-        message: 'Persona no encontrada'
-      })
     res.json(persona);
   } catch (error) {
     next(error);
@@ -66,7 +62,7 @@ router.post('/', async (req, res) => {
 
 
 // update partial persona v2
-router.patch('/:id', async (req, res) => {
+router.patch('/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
     const body = req.body;
@@ -77,14 +73,12 @@ router.patch('/:id', async (req, res) => {
       persona
     });
   } catch (error) {
-    res.status(404).json({
-      message: 'Persona no encontrada, error en: ' + varias.errorFunctionName(error)
-    })
+    next(error);
   }
 });
 
 // update persona
-router.put('/:id', async (req, res) => {
+router.put('/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
     const body = req.body;
@@ -95,14 +89,12 @@ router.put('/:id', async (req, res) => {
       persona
     });
   } catch (error) {
-    res.status(404).json({
-      message: 'Persona no encontrada, error en: ' + varias.errorFunctionName(error)
-    });
+    next(error);
   }
 });
 
 // delete persona
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
     const personaService = await PersonaService.getInstance();
@@ -112,9 +104,7 @@ router.delete('/:id', async (req, res) => {
       persona: persona
     });
   } catch (error) {
-    res.status(404).json({
-      message: 'Persona no encontrada, error en: ' + varias.errorFunctionName(error)
-    });
+    next(error);
   }
 });
 

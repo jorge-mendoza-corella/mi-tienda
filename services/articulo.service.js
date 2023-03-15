@@ -1,4 +1,5 @@
 const faker = require('faker');
+const boom = require('@hapi/boom');
 
 class ArticuloService {
 
@@ -44,13 +45,17 @@ class ArticuloService {
   }
 
   async findOne(id) {
-    return this.articulos.find(item => item.id === id);
+    const articulo = this.articulos.find(item => item.id === id);
+    if (!articulo) {
+      throw boom.notFound('Articulo no encontrado');
+    }
+    return articulo;
   }
 
   async update(id, cambios) {
     const index = this.articulos.findIndex(item => item.id === id);
     if (index === -1) {
-      throw new Error('Hubo un error');
+      throw boom.notFound('Articulo no encontrado');
     }
     const articulo = this.articulos[index];
     this.articulos[index] =
@@ -65,7 +70,7 @@ class ArticuloService {
   async delete(id) {
     const index = this.articulos.findIndex(item => item.id === id);
     if (index === -1) {
-      throw new Error('Hubo un error');
+      throw boom.notFound('Articulo no encontrado');
     }
     this.articulos.splice(index, 1);
     return { id }
