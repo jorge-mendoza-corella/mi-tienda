@@ -1,5 +1,6 @@
 const express = require('express');
 const ArticuloService = require('../services/articulo.service');
+const varias = require('../utilities/varias');
 
 // genero un router
 const router = express.Router();
@@ -61,11 +62,8 @@ router.patch('/:id', async (req, res) => {
       articulo
     });
   } catch (error) {
-    const stackTrace = error.stack;
-    const functionNameRegex = /([\w\d_.-]+\.js):(\d+):(\d+)/;
     res.status(404).json({
-      message: 'Articulo no encontrado, error en: ' + functionNameRegex.exec(stackTrace)[1] + " linea " + functionNameRegex.exec(stackTrace)[2]
-
+      message: 'Articulo no encontrado, error en: ' + varias.errorFunctionName(error)
     });
   }
 });
@@ -81,10 +79,8 @@ router.put('/:id', async (req, res) => {
       articulo
     })
   } catch (error) {
-    const stackTrace = error.stack;
-    const functionNameRegex = /([\w\d_.-]+\.js):(\d+):(\d+)/;
     res.status(404).json({
-      message: 'Articulo no encontrado, error en: ' + functionNameRegex.exec(stackTrace)[1] + " linea " + functionNameRegex.exec(stackTrace)[2]
+      message: 'Articulo no encontrado, error en: ' + varias.errorFunctionName(error)
     });
   }
 });
@@ -99,10 +95,8 @@ router.delete('/:id', async (req, res) => {
       articulo: articulo
     })
   } catch (error) {
-    const stackTrace = error.stack;
-    const functionNameRegex = /([\w\d_.-]+\.js):(\d+):(\d+)/;
     res.status(404).json({
-      message: 'Articulo no encontrado, error en: ' + functionNameRegex.exec(stackTrace)[1] + " linea " + functionNameRegex.exec(stackTrace)[2]
+      message: 'Articulo no encontrado, error en: ' + varias.errorFunctionName(error)
     });
   }
 });

@@ -1,5 +1,6 @@
 const express = require('express');
 const PersonaService = require('../services/persona.service');
+const varias = require('../utilities/varias');
 // esta es la version 2 de este router, voy a hacerle cambios para que se tengan las dos versiones por un tiempo
 
 // genero un router
@@ -11,10 +12,10 @@ const service = new PersonaService();
 // regresa los elementos especificos dependiendo de los filtros como query(?)
 router.get('/', async (req, res) => {
   const personas = await service.find();
-  if (personas.length==0)
-  return res.status(404).json({
-    message: 'No hay personas'
-  })
+  if (personas.length == 0)
+    return res.status(404).json({
+      message: 'No hay personas'
+    })
   res.json(personas);
 });
 
@@ -71,10 +72,8 @@ router.patch('/:id', async (req, res) => {
       persona
     });
   } catch (error) {
-    const stackTrace = error.stack;
-    const functionNameRegex = /([\w\d_.-]+\.js):(\d+):(\d+)/;
     res.status(404).json({
-      message: 'Persona no encontrada, error en: ' + functionNameRegex.exec(stackTrace)[1] + " linea " + functionNameRegex.exec(stackTrace)[2]
+      message: 'Persona no encontrada, error en: ' + varias.errorFunctionName(error)
     })
   }
 });
@@ -90,10 +89,8 @@ router.put('/:id', async (req, res) => {
       persona
     });
   } catch (error) {
-    const stackTrace = error.stack;
-    const functionNameRegex = /([\w\d_.-]+\.js):(\d+):(\d+)/;
     res.status(404).json({
-      message: 'Persona no encontrada, error en: ' + functionNameRegex.exec(stackTrace)[1] + " linea " + functionNameRegex.exec(stackTrace)[2]
+      message: 'Persona no encontrada, error en: ' + varias.errorFunctionName(error)
     });
   }
 });
@@ -108,10 +105,8 @@ router.delete('/:id', async (req, res) => {
       persona: persona
     });
   } catch (error) {
-    const stackTrace = error.stack;
-    const functionNameRegex = /([\w\d_.-]+\.js):(\d+):(\d+)/;
     res.status(404).json({
-      message: 'Persona no encontrada, error en: ' + functionNameRegex.exec(stackTrace)[1] + " linea " + functionNameRegex.exec(stackTrace)[2]
+      message: 'Persona no encontrada, error en: ' + varias.errorFunctionName(error)
     });
   }
 });
