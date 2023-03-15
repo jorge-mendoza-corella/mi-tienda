@@ -13,5 +13,7 @@
     },
     "rules": {
       "no-console": "warn"
-    }
+    },
+    "parser": "@babel/eslint-parser"
+
   }
