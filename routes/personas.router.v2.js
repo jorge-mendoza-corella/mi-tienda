@@ -36,15 +36,19 @@ router.get('/filtro', async (req, res) => {
 
 
 // regresa el elemento especifico, dependiendo del filtro(especifico)
-router.get('/:id', async (req, res) => {
-  const { id } = req.params;
-  const personaService = await PersonaService.getInstance();
-  const persona = await personaService.findOne(id);
-  if (!persona)
-    return res.status(404).json({
-      message: 'Persona no encontrada'
-    })
-  res.json(persona);
+router.get('/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const personaService = await PersonaService.getInstance();
+    const persona = await personaService.findOne(id);
+    if (!persona)
+      return res.status(404).json({
+        message: 'Persona no encontrada'
+      })
+    res.json(persona);
+  } catch (error) {
+    next(error);
+  }
 });
 
 

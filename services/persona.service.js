@@ -42,6 +42,7 @@ class PersonaService {
   }
 
   async findOne(id) {
+    this.getT();
     return this.personas.find(item => item.id === id);
   }
 
