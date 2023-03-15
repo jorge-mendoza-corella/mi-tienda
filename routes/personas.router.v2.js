@@ -9,14 +9,18 @@ const router = express.Router();
 const service = new PersonaService();
 
 // regresa los elementos especificos dependiendo de los filtros como query(?)
-router.get('/', (req, res) => {
-  const personas = service.find();
+router.get('/', async (req, res) => {
+  const personas = await service.find();
+  if (personas.length==0)
+  return res.status(404).json({
+    message: 'No hay personas'
+  })
   res.json(personas);
 });
 
 
 // regresa el elemento especifico, dependiendo de los dos filtros (especificos)
-router.get('/:personaId/autos/:autoId', (req, res) => {
+router.get('/:personaId/autos/:autoId', async (req, res) => {
   const { personaId, autoId } = req.params;
   res.json(
     {
@@ -27,23 +31,27 @@ router.get('/:personaId/autos/:autoId', (req, res) => {
 });
 
 // cuando hay un nivel de ruta que con¿incide con otro, hay que poner antes el que es especifico para que no choquen
-router.get('/filtro', (req, res) => {
+router.get('/filtro', async (req, res) => {
   res.send('Estoy en un filtro V2');
 });
 
 
 // regresa el elemento especifico, dependiendo del filtro(especifico)
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   const { id } = req.params;
-  const persona = service.findOne(id);
+  const persona = await service.findOne(id);
+  if (!persona)
+    return res.status(404).json({
+      message: 'Persona no encontrada'
+    })
   res.json(persona);
 });
 
 
 // crea persona
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const persona = req.body;
-  service.create(persona);
+  await service.create(persona);
   res.status(201).json({
     message: 'Creado',
     persona: persona
@@ -53,36 +61,59 @@ router.post('/', (req, res) => {
 
 
 // update partial persona v2
-router.patch('/:id', (req, res) => {
-  const { id } = req.params;
-  const body = req.body;
-  const persona = service.update(id,body);
-  res.json({
-    message: 'Actualizado solo unos campos',
-    persona
-  })
+router.patch('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const body = req.body;
+    const persona = await service.update(id, body);
+    res.json({
+      message: 'Actualizado solo unos campos',
+      persona
+    });
+  } catch (error) {
+    const stackTrace = error.stack;
+    const functionNameRegex = /([\w\d_.-]+\.js):(\d+):(\d+)/;
+    res.status(404).json({
+      message: 'Persona no encontrada, error en: ' + functionNameRegex.exec(stackTrace)[1] + " linea " + functionNameRegex.exec(stackTrace)[2]
+    })
+  }
 });
 
 // update persona
-router.put('/:id', (req, res) => {
-  const { id } = req.params;
-  const body = req.body;
-  const persona = service.update(id,body);
-  res.json({
-    message: 'Actualizado completo',
-    persona
-  })
+router.put('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const body = req.body;
+    const persona = await service.update(id, body);
+    res.json({
+      message: 'Actualizado completo',
+      persona
+    });
+  } catch (error) {
+    const stackTrace = error.stack;
+    const functionNameRegex = /([\w\d_.-]+\.js):(\d+):(\d+)/;
+    res.status(404).json({
+      message: 'Persona no encontrada, error en: ' + functionNameRegex.exec(stackTrace)[1] + " linea " + functionNameRegex.exec(stackTrace)[2]
+    });
+  }
 });
 
 // delete persona
-router.delete('/:id', (req, res) => {
-
-  const { id } = req.params;
-  const persona = service.delete(id);
-  res.json({
-    message: 'Borrado',
-    persona: persona
-  })
+router.delete('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const persona = await service.delete(id);
+    res.json({
+      message: 'Borrado',
+      persona: persona
+    });
+  } catch (error) {
+    const stackTrace = error.stack;
+    const functionNameRegex = /([\w\d_.-]+\.js):(\d+):(\d+)/;
+    res.status(404).json({
+      message: 'Persona no encontrada, error en: ' + functionNameRegex.exec(stackTrace)[1] + " linea " + functionNameRegex.exec(stackTrace)[2]
+    });
+  }
 });
 
 

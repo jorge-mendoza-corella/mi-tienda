@@ -19,7 +19,7 @@ class PersonaService {
     }
   }
 
-  create(data) {
+  async create(data) {
     const nuevaPersona = {
       id: faker.datatype.uuid(),
       ...data
@@ -28,15 +28,15 @@ class PersonaService {
     return nuevaPersona;
   }
 
-  find() {
+  async find() {
     return this.personas;
   }
 
-  findOne(id) {
+  async findOne(id) {
     return this.personas.find(item => item.id === id);
   }
 
-  update(id, cambios) {
+  async update(id, cambios) {
     const index = this.personas.findIndex(item => item.id === id);
     if (index === -1) {
       throw new Error('Hubo un error');
@@ -51,12 +51,11 @@ class PersonaService {
     return this.personas[index];
   }
 
-  delete(id) {
+  async delete(id) {
     const index = this.personas.findIndex(item => item.id === id);
     if (index === -1) {
-      throw new Error('Hubo un error');
+      throw new Error("Hubo un error");
     }
-
     this.personas.splice(index, 1);
     return { id }
   }
