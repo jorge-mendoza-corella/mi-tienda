@@ -1,19 +1,23 @@
 const express = require('express');
 const ArticuloService = require('../services/articulo.service');
+const validatorHandler = require('../middlewares/validator.handler');
+const { createArticuloSchema, updateArticuloSchema, getArticuloSchema } = require('../schemas/articulo.schema');
 
 // genero un router
 const router = express.Router();
 
 // regresa los elementos especificos dependiendo de los filtros como query(?)
-router.get('/', async (req, res) => {
-  const articuloService = await ArticuloService.getInstance();
-  const articulos = await articuloService.find();
-  if (articulos.length == 0)
-    return res.status(404).json({
-      message: 'No hay articulos'
-    })
-  res.json(articulos);
-});
+router.get('/',
+  async (req, res) => {
+    const articuloService = await ArticuloService.getInstance();
+    const articulos = await articuloService.find();
+    if (articulos.length == 0)
+      return res.status(404).json({
+        message: 'No hay articulos'
+      })
+    res.json(articulos);
+  } // para capturar errores
+);
 
 
 
@@ -24,17 +28,20 @@ router.get('/filtro', async (req, res) => {
 
 
 // regresa el elemento especifico, dependiendo del filtro(especifico)
-router.get('/:id', async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const articuloService = await ArticuloService.getInstance();
-    const articulo = await articuloService.findOne(id);
-    res.json(articulo);
-  } catch (error) {
-    next(error);
-  }
+router.get('/:id',
+  // middlewares:
+  validatorHandler(getArticuloSchema, 'params'), // para validar la info que llega
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const articuloService = await ArticuloService.getInstance();
+      const articulo = await articuloService.findOne(id);
+      res.json(articulo);
+    } catch (error) {
+      next(error);
+    }
 
-});
+  });
 
 
 // crea articulo
