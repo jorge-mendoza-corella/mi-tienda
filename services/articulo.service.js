@@ -54,6 +54,7 @@ class ArticuloService {
 
   async update(id, cambios) {
     const index = this.articulos.findIndex(item => item.id === id);
+
     if (index === -1) {
       throw boom.notFound('Articulo no encontrado');
     }

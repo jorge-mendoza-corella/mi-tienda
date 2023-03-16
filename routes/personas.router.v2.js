@@ -1,5 +1,8 @@
 const express = require('express');
 const PersonaService = require('../services/persona.service');
+const validatorHandler = require('../middlewares/validator.handler');
+const { createPersonaSchema, updatePersonaSchema, getPersonaSchema } = require('../schemas/persona.schema');
+
 
 // esta es la version 2 de este router, voy a hacerle cambios para que se tengan las dos versiones por un tiempo
 
@@ -36,77 +39,92 @@ router.get('/filtro', async (req, res) => {
 
 
 // regresa el elemento especifico, dependiendo del filtro(especifico)
-router.get('/:id', async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const personaService = await PersonaService.getInstance();
-    const persona = await personaService.findOne(id);
-    res.json(persona);
-  } catch (error) {
-    next(error);
-  }
-});
+router.get('/:id',
+  // middlewares:
+  validatorHandler(getPersonaSchema, 'params'), // para validar la info que llega
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const personaService = await PersonaService.getInstance();
+      const persona = await personaService.findOne(id);
+      res.json(persona);
+    } catch (error) {
+      next(error);
+    }
+  });
 
 
 // crea persona
-router.post('/', async (req, res) => {
-  const persona = req.body;
-  const personaService = await PersonaService.getInstance();
-  await personaService.create(persona);
-  res.status(201).json({
-    message: 'Creado',
-    persona: persona
-  })
+router.post('/',
+  // middlewares:
+  validatorHandler(getPersonaSchema, 'params'), // para validar la info que llega
+  async (req, res) => {
+    const persona = req.body;
+    const personaService = await PersonaService.getInstance();
+    await personaService.create(persona);
+    res.status(201).json({
+      message: 'Creado',
+      persona: persona
+    })
 
-});
+  });
 
 
 // update partial persona v2
-router.patch('/:id', async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const body = req.body;
-    const personaService = await PersonaService.getInstance();
-    const persona = await personaService.update(id, body);
-    res.json({
-      message: 'Actualizado solo unos campos',
-      persona
-    });
-  } catch (error) {
-    next(error);
-  }
-});
+router.patch('/:id',
+  // middlewares:
+  validatorHandler(getPersonaSchema, 'params'), // para validar la info que llega
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const body = req.body;
+      const personaService = await PersonaService.getInstance();
+      const persona = await personaService.update(id, body);
+      res.json({
+        message: 'Actualizado solo unos campos',
+        persona
+      });
+    } catch (error) {
+      next(error);
+    }
+  });
 
 // update persona
-router.put('/:id', async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const body = req.body;
-    const personaService = await PersonaService.getInstance();
-    const persona = await personaService.update(id, body);
-    res.json({
-      message: 'Actualizado completo',
-      persona
-    });
-  } catch (error) {
-    next(error);
-  }
-});
+router.put('/:id',
+  // middlewares:
+  validatorHandler(getPersonaSchema, 'params'), // para validar la info que llega
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const body = req.body;
+      const personaService = await PersonaService.getInstance();
+      const persona = await personaService.update(id, body);
+      res.json({
+        message: 'Actualizado completo',
+        persona
+      });
+    } catch (error) {
+      next(error);
+    }
+  });
 
 // delete persona
-router.delete('/:id', async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const personaService = await PersonaService.getInstance();
-    const persona = await personaService.delete(id);
-    res.json({
-      message: 'Borrado',
-      persona: persona
-    });
-  } catch (error) {
-    next(error);
-  }
-});
+router.delete('/:id',
+  // middlewares:
+  validatorHandler(getPersonaSchema, 'params'), // para validar la info que llega
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const personaService = await PersonaService.getInstance();
+      const persona = await personaService.delete(id);
+      res.json({
+        message: 'Borrado',
+        persona: persona
+      });
+    } catch (error) {
+      next(error);
+    }
+  });
 
 
 
