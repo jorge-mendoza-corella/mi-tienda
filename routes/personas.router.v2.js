@@ -1,6 +1,7 @@
 const express = require('express');
 const PersonaService = require('../services/persona.service');
 const validatorHandler = require('../middlewares/validator.handler');
+const { requestHandlerGet, requestHandlerGetOne, requestHandlerAction } = require('../middlewares/request.handler');
 const { createPersonaSchema, updatePersonaSchema, getPersonaSchema } = require('../schemas/persona.schema');
 
 
@@ -9,32 +10,24 @@ const { createPersonaSchema, updatePersonaSchema, getPersonaSchema } = require('
 // genero un router
 const router = express.Router();
 
-// regresa los elementos especificos dependiendo de los filtros como query(?)
-router.get('/', async (req, res) => {
-  const personaService = await PersonaService.getInstance();
-  const personas = await personaService.find();
-  if (personas.length == 0)
-    return res.status(404).json({
-      message: 'No hay personas'
-    })
-  res.json(personas);
-});
-
-
-// regresa el elemento especifico, dependiendo de los dos filtros (especificos)
-router.get('/:personaId/autos/:autoId', async (req, res) => {
-  const { personaId, autoId } = req.params;
-  res.json(
-    {
-      "ID_persona": personaId,
-      autoId
-    }
-  )
-});
+// instancio el servicio
+const servicio = PersonaService.getInstance();
 
 // cuando hay un nivel de ruta que con¿incide con otro, hay que poner antes el que es especifico para que no choquen
 router.get('/filtro', async (req, res) => {
   res.send('Estoy en un filtro V2');
+});
+
+// regresa los elementos especificos dependiendo de los filtros como query(?)
+router.get('/',
+  // middlewares:
+  requestHandlerGet(servicio, 'find'), // para validar la info que llega
+);
+
+
+// cuando hay un nivel de ruta que con¿incide con otro, hay que poner antes el que es especifico para que no choquen
+router.get('/filtro', async (req, res) => {
+  res.send('Estoy en un filtro de Personas');
 });
 
 
@@ -42,90 +35,35 @@ router.get('/filtro', async (req, res) => {
 router.get('/:id',
   // middlewares:
   validatorHandler(getPersonaSchema, 'params'), // para validar la info que llega
-  async (req, res, next) => {
-    try {
-      const { id } = req.params;
-      const personaService = await PersonaService.getInstance();
-      const persona = await personaService.findOne(id);
-      res.json(persona);
-    } catch (error) {
-      next(error);
-    }
-  });
+  requestHandlerGetOne(servicio, 'findOne', 'params',200),  // para enviar el request y/o capturar errores
+);
 
 
-// crea persona
+// crea Persona
 router.post('/',
-  // middlewares:
-  validatorHandler(getPersonaSchema, 'params'), // para validar la info que llega
-  async (req, res) => {
-    const persona = req.body;
-    const personaService = await PersonaService.getInstance();
-    await personaService.create(persona);
-    res.status(201).json({
-      message: 'Creado',
-      persona: persona
-    })
-
-  });
+  validatorHandler(createPersonaSchema, 'body'), // para validar la info que llega
+  requestHandlerAction(servicio, 'create', 'body,', 201, 'Creado') // para enviar el request y/o capturar errores
+);
 
 
-// update partial persona v2
+// update partial Persona
 router.patch('/:id',
-  // middlewares:
-  validatorHandler(getPersonaSchema, 'params'), // para validar la info que llega
-  async (req, res, next) => {
-    try {
-      const { id } = req.params;
-      const body = req.body;
-      const personaService = await PersonaService.getInstance();
-      const persona = await personaService.update(id, body);
-      res.json({
-        message: 'Actualizado solo unos campos',
-        persona
-      });
-    } catch (error) {
-      next(error);
-    }
-  });
+  validatorHandler(updatePersonaSchema, 'body'), // para validar la info que llega
+  requestHandlerAction(servicio, 'update', 'body,params', 200, 'Actualizado solo unos campos') // para enviar el request y/o capturar errores
+  );
 
-// update persona
+// update Persona
 router.put('/:id',
-  // middlewares:
-  validatorHandler(getPersonaSchema, 'params'), // para validar la info que llega
-  async (req, res, next) => {
-    try {
-      const { id } = req.params;
-      const body = req.body;
-      const personaService = await PersonaService.getInstance();
-      const persona = await personaService.update(id, body);
-      res.json({
-        message: 'Actualizado completo',
-        persona
-      });
-    } catch (error) {
-      next(error);
-    }
-  });
+  validatorHandler(updatePersonaSchema, 'body'), // para validar la info que llega
+  requestHandlerAction(servicio, 'update', 'body,params', 200, 'Actualizado completo') // para enviar el request y/o capturar errores
+  );
 
-// delete persona
+// delete Persona
 router.delete('/:id',
-  // middlewares:
   validatorHandler(getPersonaSchema, 'params'), // para validar la info que llega
-  async (req, res, next) => {
-    try {
-      const { id } = req.params;
-      const personaService = await PersonaService.getInstance();
-      const persona = await personaService.delete(id);
-      res.json({
-        message: 'Borrado',
-        persona: persona
-      });
-    } catch (error) {
-      next(error);
-    }
-  });
+  requestHandlerAction(servicio, 'delete', ',params', 200, 'Borrado') // para enviar el request y/o capturar errores
 
+  );
 
 
 module.exports = router;

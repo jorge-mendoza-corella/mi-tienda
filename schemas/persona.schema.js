@@ -8,12 +8,12 @@ const email = Joi.string().email();
 
 const createPersonaSchema = Joi.object({
   nombre: nombre.required(),
-  imagen: email.required()
+  email: email.required()
 });
 
 const updatePersonaSchema = Joi.object({
   nombre: nombre,
-  imagen: email
+  email: email
 });
 
 const getPersonaSchema = Joi.object({
