@@ -34,36 +34,38 @@ router.get('/filtro', async (req, res) => {
 // regresa el elemento especifico, dependiendo del filtro(especifico)
 router.get('/:id',
   // middlewares:
-  validatorHandler(getPersonaSchema, 'params'), // para validar la info que llega
-  requestHandlerGetOne(servicio, 'findOne', 'params',200),  // para enviar el request y/o capturar errores
+  validatorHandler(getPersonaSchema, 'params'), // para validar la info que llega en params (id)
+  requestHandlerGetOne(servicio, 'findOne', 'params', 200),  // para enviar el request y/o capturar errores
 );
 
 
 // crea Persona
 router.post('/',
-  validatorHandler(createPersonaSchema, 'body'), // para validar la info que llega
+  validatorHandler(createPersonaSchema, 'body'), // para validar la info que llega en body (elemento)
   requestHandlerAction(servicio, 'create', 'body,', 201, 'Creado') // para enviar el request y/o capturar errores
 );
 
 
 // update partial Persona
 router.patch('/:id',
-  validatorHandler(updatePersonaSchema, 'body'), // para validar la info que llega
+  validatorHandler(getPersonaSchema, 'params'), // para validar la info que llega en params (id)
+  validatorHandler(updatePersonaSchema, 'body'), // para validar la info que llega en body (elemento)
   requestHandlerAction(servicio, 'update', 'body,params', 200, 'Actualizado solo unos campos') // para enviar el request y/o capturar errores
-  );
+);
 
 // update Persona
 router.put('/:id',
-  validatorHandler(updatePersonaSchema, 'body'), // para validar la info que llega
+  validatorHandler(getPersonaSchema, 'params'), // para validar la info que llega en params (id)
+  validatorHandler(updatePersonaSchema, 'body'), // para validar la info que llega en body (elemento)
   requestHandlerAction(servicio, 'update', 'body,params', 200, 'Actualizado completo') // para enviar el request y/o capturar errores
-  );
+);
 
 // delete Persona
 router.delete('/:id',
-  validatorHandler(getPersonaSchema, 'params'), // para validar la info que llega
+  validatorHandler(getPersonaSchema, 'params'), // para validar la info que llega en params (id)
   requestHandlerAction(servicio, 'delete', ',params', 200, 'Borrado') // para enviar el request y/o capturar errores
 
-  );
+);
 
 
 module.exports = router;
