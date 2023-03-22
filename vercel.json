@@ -1,8 +1,8 @@
 {
   "rewrites":[
     {
-      "source": "/api/(.*)",
-      "destination": "/api"
+      "source": "/api/",
+      "destination": "/api/v2/persona"
     }
   ]
 }
