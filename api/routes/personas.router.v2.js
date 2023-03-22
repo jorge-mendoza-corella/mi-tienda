@@ -38,7 +38,7 @@ router.get('/:id',
   requestHandlerGetOne(servicio, 'findOne', 'params', 200),  // para enviar el request y/o capturar errores
 );
 
-
+/*
 // crea Persona
 router.post('/',
   validatorHandler(createPersonaSchema, 'body'), // para validar la info que llega en body (elemento)
@@ -65,7 +65,7 @@ router.delete('/:id',
   validatorHandler(getPersonaSchema, 'params'), // para validar la info que llega en params (id)
   requestHandlerAction(servicio, 'delete', ',params', 200, 'Borrado') // para enviar el request y/o capturar errores
 
-);
+); */
 
 
 module.exports = router;

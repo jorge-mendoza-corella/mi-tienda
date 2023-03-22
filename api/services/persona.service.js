@@ -49,7 +49,7 @@ class PersonaService {
       }
       return persona;
   }
-
+/*
   async update(id, cambios) {
     const index = this.personas.findIndex(item => item.id === id);
     if (index === -1) {
@@ -73,7 +73,7 @@ class PersonaService {
     this.personas.splice(index, 1);
     return { id }
   }
-
+ */
 
 }
 
