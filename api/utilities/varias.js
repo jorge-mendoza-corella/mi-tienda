@@ -1,5 +1,5 @@
 
-function errorFunctionName(error) {
+/* function errorFunctionName(error) {
   const stackTrace = error.stack;
   const functionNameRegex = /at\s+(.*)\s+\(/;
   const functionNameRegex2 = /([\w\d_.-]+\.js):(\d+):(\d+)/;
@@ -8,3 +8,4 @@ function errorFunctionName(error) {
 }
 
 module.exports = {errorFunctionName};
+ */

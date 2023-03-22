@@ -1,6 +1,6 @@
 const express = require('express');
 const faker = require('faker');
-
+/*
 // genero un router
 const router = express.Router();
 
@@ -68,3 +68,4 @@ router.get('/:id', (req, res) => {
 
 
 module.exports = router;
+ */
