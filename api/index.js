@@ -14,9 +14,9 @@ app.get('/api/nueva-ruta', (req, res) => {
 })
 
 routerApp(app);
-app.use(logErrors);
-app.use(errorBoom);
-app.use(errorHandler);
+//app.use(logErrors);
+//app.use(errorBoom);
+//app.use(errorHandler);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
