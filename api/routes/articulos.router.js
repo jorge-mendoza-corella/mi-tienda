@@ -4,7 +4,7 @@ const validatorHandler = require('../middlewares/validator.handler');
 const { requestHandlerGet, requestHandlerGetOne, requestHandlerAction } = require('../middlewares/request.handler');
 const { createArticuloSchema, updateArticuloSchema, getArticuloSchema } = require('../schemas/articulo.schema');
 
-/* // genero un router
+// genero un router
 const router = express.Router();
 
 // instancio el servicio
@@ -62,4 +62,3 @@ router.delete('/:id',
 
 
 module.exports = router;
- */

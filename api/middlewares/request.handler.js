@@ -25,7 +25,7 @@ function requestHandlerGetOne(servicio, funcion, property, statusCode) {
   }
 }
 
-/*
+
 function requestHandlerAction(servicio, funcion, property, statusCode, mensaje) {
   return async (req, res, next) => {
     try {
@@ -55,6 +55,6 @@ function requestHandlerAction(servicio, funcion, property, statusCode, mensaje) 
     }
   }
 }
- */
 
-module.exports = { requestHandlerGet, requestHandlerGetOne/* , requestHandlerAction  */}
+
+module.exports = { requestHandlerGet, requestHandlerGetOne, requestHandlerAction }

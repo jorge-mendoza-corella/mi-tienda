@@ -1,7 +1,7 @@
 const faker = require('faker');
 const boom = require('@hapi/boom');
 
-/* class ArticuloService {
+class ArticuloService {
 
 
   static _articulosServiceInstance = null;
@@ -81,4 +81,3 @@ const boom = require('@hapi/boom');
 }
 
 module.exports = ArticuloService;
- */
