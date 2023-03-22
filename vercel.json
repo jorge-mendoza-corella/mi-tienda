@@ -2,7 +2,7 @@
   "rewrites":[
     {
       "source": "/api/",
-      "destination": "/api/v2/persona"
+      "destination": "/api/v2/personas"
     }
   ]
 }
