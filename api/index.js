@@ -5,11 +5,11 @@ const {logErrors,errorHandler,errorBoom} = require('./middlewares/error.handler'
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
   res.send('hola mi server en express')
 })
 
-app.get('/nueva-ruta', (req, res) => {
+app.get('/api/nueva-ruta', (req, res) => {
   res.send('hola esta es unua nueva ruta')
 })
 
