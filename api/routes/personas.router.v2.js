@@ -34,7 +34,7 @@ router.get('/filtro', async (req, res) => {
 // regresa el elemento especifico, dependiendo del filtro(especifico)
 router.get('/:id',
   // middlewares:
-  validatorHandler(getPersonaSchema, 'params'), // para validar la info que llega en params (id)
+  //validatorHandler(getPersonaSchema, 'params'), // para validar la info que llega en params (id)
   requestHandlerGetOne(servicio, 'findOne', 'params', 200),  // para enviar el request y/o capturar errores
 );
 

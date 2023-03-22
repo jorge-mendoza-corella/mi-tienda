@@ -1,4 +1,4 @@
-function logErrors(err, req, res, next) {
+/* function logErrors(err, req, res, next) {
   console.error(err + errorFunctionName(err));
   next(err);
 }
@@ -41,3 +41,4 @@ function errorFunctionName(error) {
 
 
 module.exports = { logErrors, errorHandler, errorBoom }
+ */
