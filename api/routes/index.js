@@ -11,7 +11,7 @@ function routerApp(app) {
   const routerV1 = express.Router();
   const routerV2 = express.Router();
 
-  //app.use('/api/v1', routerV1);
+  app.use('/api/v1', routerV1);
   app.use('/api/v2', routerV2);
 
   // ruteos de v1

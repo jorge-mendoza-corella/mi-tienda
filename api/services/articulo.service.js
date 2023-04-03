@@ -1,5 +1,7 @@
 const faker = require('faker');
 const boom = require('@hapi/boom');
+const conexion = require('../libs/postgress.connection');
+const errorDB = require('../middlewares/error.handler');
 
 class ArticuloService {
 
@@ -40,15 +42,29 @@ class ArticuloService {
     return nuevaArticulo;
   }
 
-  async find() {
-    return this.articulos;
+  async find(next) {
+    const client = await conexion();
+    try {
+      const articulos = await client.query('SELECT * FROM ARTICULOS');
+    } catch (error) {
+       throw errorDB.errorDBHandler(error,next);
+    }
+
+    return articulos.rows;
   }
 
-  async findOne(id) {
-    const articulo = this.articulos.find(item => item.id === id);
-    if (!articulo) {
-      throw boom.notFound('Articulo no encontrado');
+  async findOne(id,next) {
+    const client = await conexion();
+    try {
+      const articulo = await client.query('SELECT * FROM ARTICULOS WHERE ID = $1', [id]);
+
+      if (articulo.rowCount == 0) {
+        throw boom.notFound('Articulo no encontrado');
+      }
+    } catch (error) {
+      throw errorDB.errorDBHandler(error,next);
     }
+
     return articulo;
   }
 

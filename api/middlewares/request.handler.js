@@ -1,14 +1,15 @@
 const ArticuloService = require('../services/articulo.service');
 const PersonaService = require('../services/persona.service');
+const errorHandler = require('../middlewares/error.handler');
 
 function requestHandlerGet(servicio, funcion) {
   return async (req, res, next) => {
-    const elementos = await servicio[funcion]();
-    if (elementos.length == 0)
-      return res.status(404).json({
-        message: 'No hay elementos'
-      })
-    res.json(elementos);
+    try {
+      const elementos = await servicio[funcion](next);
+      res.json(elementos);
+    } catch (error) {
+      next(error);
+    }
   }
 }
 
@@ -17,7 +18,7 @@ function requestHandlerGetOne(servicio, funcion, property, statusCode) {
   return async (req, res, next) => {
     try {
       const { id } = req[property];
-      const elemento = await servicio[funcion](id);
+      const elemento = await servicio[funcion](id,next);
       res.status(statusCode).json(elemento);
     } catch (error) {
       next(error);
@@ -26,7 +27,7 @@ function requestHandlerGetOne(servicio, funcion, property, statusCode) {
 }
 
 
-function requestHandlerAction(servicio, funcion, property, statusCode, mensaje) {
+function requestHandlerAction(servicio, funcion, property, statusCode, mensaje, next) {
   return async (req, res, next) => {
     try {
       const [body, params] = property.split(',');
@@ -40,11 +41,11 @@ function requestHandlerAction(servicio, funcion, property, statusCode, mensaje) 
 
       // si existen elementos body y params, entonces mando los dos parametros en la funcion dinamica
       if (body && params)
-        e = await servicio[funcion](id, elemento); // para update
+        e = await servicio[funcion](id, elemento, next); // para update
       else if (body)// si existe el elemento body, entonces mando solo el parametro de body en la funcion dinamica
-        e = await servicio[funcion](elemento); //para create
+        e = await servicio[funcion](elemento, next); //para create
       else // si existe el elemento params, entonces mando solo el parametro de params en la funcion dinamica
-        e = await servicio[funcion](id); // para delete
+        e = await servicio[funcion](id, next); // para delete
 
       res.status(statusCode).json({
         message: mensaje,

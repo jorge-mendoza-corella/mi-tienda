@@ -3,13 +3,16 @@ function logErrors(err, req, res, next) {
   next(err);
 }
 
-function errorHandler(err, req, res, next) {
+function errorHandler(err,req, res,next) {
   res.status(500).json({
-    message: err.message,
-    stack: err.stack,
+    message: err.message
   });
 }
 
+function errorDBHandler(err,next) {
+  console.error("AY WEYYYYYY ALGO SUCEDIO EN LA BD.......");
+  next(err);
+}
 
 function errorBoom(err, req, res, next) {
   if (err.isBoom) {
@@ -20,7 +23,6 @@ function errorBoom(err, req, res, next) {
     next(err);
   }
 }
-
 
 function errorFunctionName(error) {
   const stackTrace = error.stack;
@@ -40,4 +42,4 @@ function errorFunctionName(error) {
 }
 
 
-module.exports = { logErrors, errorHandler, errorBoom }
+module.exports = { logErrors, errorHandler, errorBoom, errorDBHandler }

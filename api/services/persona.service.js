@@ -1,5 +1,6 @@
 const faker = require('faker');
 const boom = require('@hapi/boom');
+const conexion = require('../libs/postgress.connection');
 
 class PersonaService {
 
@@ -39,15 +40,31 @@ class PersonaService {
   }
 
   async find() {
-    return this.personas;
+    const client = await conexion();
+    try {
+      const personas = await client.query('SELECT * FROM PERSONAS');
+    } catch (error) {
+
+    }
+
+    return personas.rows;
   }
 
   async findOne(id) {
-      const persona = this.personas.find(item => item.id === id);
-      if(!persona){
+
+    const client = await conexion();
+    try {
+      const persona = await client.query('SELECT * FROM PERSONAS WHERE ID = $1', [id]);
+
+      if (persona.rowCount == 0) {
         throw boom.notFound('Persona no encontrada');
       }
-      return persona;
+    } catch (error) {
+      throw errorDB.errorDBHandler(error, next);
+    }
+
+    return persona;
+
   }
 
   async update(id, cambios) {
