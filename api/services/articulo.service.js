@@ -1,7 +1,7 @@
 const faker = require('faker');
 const boom = require('@hapi/boom');
-const conexion = require('../libs/postgress.connection');
-const errorDB = require('../middlewares/error.handler');
+const pool = require('../libs/postgress.pool');
+const resultFromQuery = require('../utilities/acciones.db');
 
 class ArticuloService {
 
@@ -19,6 +19,8 @@ class ArticuloService {
   constructor() {
     this.articulos = [];
     this.generate();
+    this.pool = pool;
+    this.pool.on('error', (err) => console.error(err));
   }
 
   generate() {
@@ -43,29 +45,15 @@ class ArticuloService {
   }
 
   async find(next) {
-    const client = await conexion();
-    try {
-      const articulos = await client.query('SELECT * FROM ARTICULOS');
-    } catch (error) {
-       throw errorDB.errorDBHandler(error,next);
-    }
-
-    return articulos.rows;
+    const query = 'SELECT * FROM ARTICULOS';
+    const articulos = await resultFromQuery(this.pool, query, null, true, next);
+    return articulos;
   }
 
-  async findOne(id,next) {
-    const client = await conexion();
-    try {
-      const articulo = await client.query('SELECT * FROM ARTICULOS WHERE ID = $1', [id]);
-
-      if (articulo.rowCount == 0) {
-        throw boom.notFound('Articulo no encontrado');
-      }
-    } catch (error) {
-      throw errorDB.errorDBHandler(error,next);
-    }
-
-    return articulo;
+  async findOne(id, next) {
+    const query = 'SELECT * FROM ARTICULOS WHERE ID = $1';
+    const articulo = await resultFromQuery(this.pool, query, id, true, next);
+    return articulo[0];
   }
 
   async update(id, cambios) {

@@ -1,6 +1,7 @@
 const faker = require('faker');
 const boom = require('@hapi/boom');
-const conexion = require('../libs/postgress.connection');
+const pool = require('../libs/postgress.pool');
+const resultFromQuery = require('../utilities/acciones.db');
 
 class PersonaService {
 
@@ -16,6 +17,8 @@ class PersonaService {
   constructor() {
     this.personas = [];
     this.generate();
+    this.pool = pool;
+    this.pool.on('error', (err) => console.error(err));
   }
 
   generate() {
@@ -39,32 +42,16 @@ class PersonaService {
     return nuevaPersona;
   }
 
-  async find() {
-    const client = await conexion();
-    try {
-      const personas = await client.query('SELECT * FROM PERSONAS');
-    } catch (error) {
-
-    }
-
-    return personas.rows;
+  async find(next) {
+    const query = 'SELECT * FROM PERSONAS';
+    const personas = await resultFromQuery(this.pool, query, null, true, next);
+    return personas;
   }
 
-  async findOne(id) {
-
-    const client = await conexion();
-    try {
-      const persona = await client.query('SELECT * FROM PERSONAS WHERE ID = $1', [id]);
-
-      if (persona.rowCount == 0) {
-        throw boom.notFound('Persona no encontrada');
-      }
-    } catch (error) {
-      throw errorDB.errorDBHandler(error, next);
-    }
-
-    return persona;
-
+  async findOne(id, next) {
+    const query = 'SELECT * FROM PERSONAS WHERE ID = $1';
+    const persona = await resultFromQuery(this.pool, query, id, true, next);
+    return persona[0];
   }
 
   async update(id, cambios) {

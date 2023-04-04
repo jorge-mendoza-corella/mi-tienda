@@ -1,6 +1,5 @@
 const ArticuloService = require('../services/articulo.service');
 const PersonaService = require('../services/persona.service');
-const errorHandler = require('../middlewares/error.handler');
 
 function requestHandlerGet(servicio, funcion) {
   return async (req, res, next) => {
@@ -18,7 +17,7 @@ function requestHandlerGetOne(servicio, funcion, property, statusCode) {
   return async (req, res, next) => {
     try {
       const { id } = req[property];
-      const elemento = await servicio[funcion](id,next);
+      const elemento = await servicio[funcion](id, next);
       res.status(statusCode).json(elemento);
     } catch (error) {
       next(error);

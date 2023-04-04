@@ -1,17 +1,6 @@
 function logErrors(err, req, res, next) {
   console.error(err + errorFunctionName(err));
-  next(err);
-}
-
-function errorHandler(err,req, res,next) {
-  res.status(500).json({
-    message: err.message
-  });
-}
-
-function errorDBHandler(err,next) {
-  console.error("AY WEYYYYYY ALGO SUCEDIO EN LA BD.......");
-  next(err);
+  next(err); // el siguiente actualmente es: errorBoom
 }
 
 function errorBoom(err, req, res, next) {
@@ -20,9 +9,21 @@ function errorBoom(err, req, res, next) {
     res.status(output.statusCode).json(output.payload);
   }
   else {
-    next(err);
+    next(err); // el siguiente actualmente es: errorDBHandler
   }
 }
+
+function errorDBHandler(err,req, res,next) {
+  console.error("AY WEYYYYYY ALGO SUCEDIO EN LA BD.......");
+  next(err); // el siguiente actualmente es: errorHandler
+}
+
+function errorHandler(err,req, res,next) {
+  res.status(500).json({
+    message: err.message
+  });
+}
+
 
 function errorFunctionName(error) {
   const stackTrace = error.stack;
