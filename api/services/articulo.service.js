@@ -1,6 +1,5 @@
 const faker = require('faker');
 const boom = require('@hapi/boom');
-const pool = require('../libs/postgress.pool');
 const resultFromQuery = require('../utilities/acciones.db');
 
 class ArticuloService {
@@ -18,9 +17,6 @@ class ArticuloService {
 
   constructor() {
     this.articulos = [];
-    //this.generate();
-    this.pool = pool;
-    this.pool.on('error', (err) => console.error(err));
   }
 
   generate() {
