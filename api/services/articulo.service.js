@@ -33,11 +33,7 @@ class ArticuloService {
   }
 
   async create(data) {
-    const nuevaArticulo = {
-      id: faker.datatype.uuid(),
-      ...data
-    }
-    this.articulos.push(nuevaArticulo);
+    const nuevaArticulo = await models.Articulo.create(data);
     return nuevaArticulo;
   }
 
@@ -56,43 +52,36 @@ class ArticuloService {
     */
 
   // ESTO LO HAGO CON SERIALIZACION (ORM)
-  async find() {
-    const articulos = await models.Articulo.findAll();
+  async find(next) {
+  //  const articulos = await models.Articulo.findAll();
+
+
+
+    const query = 'SELECT * FROM ARTICULOS where c=1';
+    const articulos = await resultFromQuery(this.pool, query, null, true, next);
+
     return articulos;
   }
 
   async findOne(id) {
     const articulos = await models.Articulo.findByPk(id);
+    if (!articulos) {
+      throw boom.notFound('Articulo no encontrado');
+    }
     return articulos;
   }
 
-
   async update(id, cambios) {
-    const index = this.articulos.findIndex(item => item.id === id);
-
-    if (index === -1) {
-      throw boom.notFound('Articulo no encontrado');
-    }
-    const articulo = this.articulos[index];
-    this.articulos[index] =
-    {
-      ...articulo,
-      ...cambios
-    }
-
-    return this.articulos[index];
+    const articulo = await this.findOne(id);
+    const resp = await articulo.update(cambios);
+    return resp;
   }
 
   async delete(id) {
-    const index = this.articulos.findIndex(item => item.id === id);
-    if (index === -1) {
-      throw boom.notFound('Articulo no encontrado');
-    }
-    this.articulos.splice(index, 1);
-    return { id }
+    const articulo = await this.findOne(id);
+    await articulo.destroy();
+    return { id };
   }
-
-
 }
 
 module.exports = ArticuloService;

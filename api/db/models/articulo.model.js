@@ -18,6 +18,10 @@ const ArticuloSchema = {
     allowNull: false,
     type: DataTypes.DOUBLE
   },
+  imagen: {
+    allowNull: true,
+    type: DataTypes.TEXT
+  },
   createAt: {
     allowNull: false,
     type: DataTypes.DATE,

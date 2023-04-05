@@ -1,5 +1,6 @@
 const ArticuloService = require('../services/articulo.service');
 const PersonaService = require('../services/persona.service');
+const faker = require('faker');
 
 function requestHandlerGet(servicio, funcion) {
   return async (req, res, next) => {
@@ -34,6 +35,9 @@ function requestHandlerAction(servicio, funcion, property, statusCode, mensaje, 
       // si existen los elementos, asigno el valor desde el req, y si no solo ''
       const { id } = params ? req[params] : '';
       const elemento = body ? req[body] : '';
+
+      // le pego al elemento un uuid generado desde faker
+      elemento.id = faker.datatype.uuid();
 
       // este es el resultado final de cualquier accion
       let e;
