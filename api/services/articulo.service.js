@@ -1,6 +1,7 @@
 const faker = require('faker');
 const boom = require('@hapi/boom');
 const resultFromQuery = require('../utilities/acciones.db');
+const { models } = require('../libs/sequelize');
 
 class ArticuloService {
 
@@ -40,17 +41,31 @@ class ArticuloService {
     return nuevaArticulo;
   }
 
-  async find(next) {
-    const query = 'SELECT * FROM ARTICULOS';
-    const articulos = await resultFromQuery(this.pool, query, null, true, next);
-    return articulos;
-  }
+  // ESTO LO HAGO CON LA CONEXION AL POOL Y LUEGO CON UNA CONSULTA DIRECTA
+  /*   async find(next) {
+      const query = 'SELECT * FROM ARTICULOS';
+      const articulos = await resultFromQuery(this.pool, query, null, true, next);
+      return articulos;
+    }
 
-  async findOne(id, next) {
+   async findOne(id, next) {
     const query = 'SELECT * FROM ARTICULOS WHERE ID = $1';
     const articulo = await resultFromQuery(this.pool, query, id, true, next);
     return articulo[0];
   }
+    */
+
+  // ESTO LO HAGO CON SERIALIZACION (ORM)
+  async find() {
+    const articulos = await models.Articulo.findAll();
+    return articulos;
+  }
+
+  async findOne(id) {
+    const articulos = await models.Articulo.findByPk(id);
+    return articulos;
+  }
+
 
   async update(id, cambios) {
     const index = this.articulos.findIndex(item => item.id === id);
