@@ -13,12 +13,26 @@ function errorBoom(err, req, res, next) {
   }
 }
 
-function errorDBHandler(err,req, res,next) {
-  console.error("AY WEYYYYYY ALGO SUCEDIO EN LA BD.......");
-  next(err); // el siguiente actualmente es: errorHandler
+function errorDBHandler(err, req, res, next) {
+  // la propiedad fields y parent vienen dentro del error que se genera cuando se hace la consulta a la base de datos
+  if (err.parent) {
+    const { fields, parent } = err;
+    res.status(500).json({
+      //field: fields,
+      message: parent.detail ? parent.detail: parent
+
+    });
+
+    console.error("AY WEYYYYYY ALGO SUCEDIO EN LA BD......." + ' MENSAJE: ');
+    console.log(parent.detail ? parent.detail: parent.routine + ' EN ' + parent.sql);
+  }
+  else {
+    next(err); // el siguiente actualmente es: errorHandler
+  }
+
 }
 
-function errorHandler(err,req, res,next) {
+function errorHandler(err, req, res, next) {
   res.status(500).json({
     message: err.message
   });
