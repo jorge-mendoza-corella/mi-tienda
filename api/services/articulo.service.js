@@ -18,7 +18,7 @@ class ArticuloService {
 
   constructor() {
     this.articulos = [];
-    this.generate();
+    //this.generate();
     this.pool = pool;
     this.pool.on('error', (err) => console.error(err));
   }

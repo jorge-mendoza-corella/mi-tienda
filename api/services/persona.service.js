@@ -16,7 +16,7 @@ class PersonaService {
 
   constructor() {
     this.personas = [];
-    this.generate();
+    //this.generate();
     this.pool = pool;
     this.pool.on('error', (err) => console.error(err));
   }
