@@ -16,6 +16,7 @@ function errorBoom(err, req, res, next) {
 function errorDBHandler(err, req, res, next) {
   // la propiedad fields y parent vienen dentro del error que se genera cuando se hace la consulta a la base de datos
   if (err.parent) {
+    //if (err instanceof ValidationError) {
     const { fields, parent } = err;
     res.status(500).json({
       //field: fields,
