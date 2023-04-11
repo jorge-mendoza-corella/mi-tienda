@@ -22,6 +22,11 @@ const ArticuloSchema = {
     allowNull: true,
     type: DataTypes.TEXT
   },
+  peso: {
+    allowNull: false,
+    type: DataTypes.DOUBLE,
+    defaultValue: 0
+  },
   createAt: {
     allowNull: false,
     type: DataTypes.DATE,
