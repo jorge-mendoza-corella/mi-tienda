@@ -36,8 +36,30 @@ function requestHandlerAction(servicio, funcion, property, statusCode, mensaje, 
       const { id } = params ? req[params] : '';
       const elemento = body ? req[body] : '';
 
+      // Función que busca el objeto anidado
+      const buscarObjetoAnidado = (objeto) => {
+        let objetoAnidadoEncontrado = null;
+        Object.values(objeto).find(valor => {
+          if (typeof valor === 'object' && valor !== null) {
+            objetoAnidadoEncontrado = valor;
+            return true;
+          }
+          return false;
+        });
+        return objetoAnidadoEncontrado;
+      };
+
+      // Obtener el objeto anidado
+      let elementoAnidado = buscarObjetoAnidado(elemento);
+
       // le pego al elemento un uuid generado desde faker
+      //console.log(elemento);
       elemento.id = faker.datatype.uuid();
+
+      // le pego al elemento anidado un uuid generado desde faker, para su elemento id
+      //console.log(elementoAnidado);
+      elementoAnidado ? elementoAnidado.id = faker.datatype.uuid() : undefined;
+
 
       // este es el resultado final de cualquier accion
       let e;
