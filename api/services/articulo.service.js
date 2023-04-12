@@ -32,37 +32,22 @@ class ArticuloService {
     }
   }
 
+  // ESTO LO HAGO CON SERIALIZACION (ORM)
   async create(data) {
     const nuevaArticulo = await models.Articulo.create(data);
     return nuevaArticulo;
   }
 
-  // ESTO LO HAGO CON LA CONEXION AL POOL Y LUEGO CON UNA CONSULTA DIRECTA
-  /*   async find(next) {
-      const query = 'SELECT * FROM ARTICULOS';
-      const articulos = await resultFromQuery(this.pool, query, null, true, next);
-      return articulos;
-    }
-
-   async findOne(id, next) {
-    const query = 'SELECT * FROM ARTICULOS WHERE ID = $1';
-    const articulo = await resultFromQuery(this.pool, query, id, true, next);
-    return articulo[0];
-  }
-    */
-
-  // ESTO LO HAGO CON SERIALIZACION (ORM)
+  // ESTO LO HAGO CON SERIALIZACION (ORM) O POR UNA CONSULTA DIRECTA CONECTADO POR POOL
   async find(next) {
-  //  const articulos = await models.Articulo.findAll();
-
-
-
+    //  const articulos = await models.Articulo.findAll();
     const query = 'SELECT * FROM ARTICULOS where c=1';
     const articulos = await resultFromQuery(this.pool, query, null, true, next);
 
     return articulos;
   }
 
+  // ESTO LO HAGO CON SERIALIZACION (ORM)
   async findOne(id) {
     const articulos = await models.Articulo.findByPk(id);
     if (!articulos) {
@@ -71,12 +56,14 @@ class ArticuloService {
     return articulos;
   }
 
+  // ESTO LO HAGO CON SERIALIZACION (ORM)
   async update(id, cambios) {
     const articulo = await this.findOne(id);
     const resp = await articulo.update(cambios);
     return resp;
   }
 
+  // ESTO LO HAGO CON SERIALIZACION (ORM)
   async delete(id) {
     const articulo = await this.findOne(id);
     await articulo.destroy();
