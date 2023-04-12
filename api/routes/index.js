@@ -2,6 +2,7 @@ const express = require('express');
 const personasRouter = require('./personas.router');
 const personasRouterV2 = require('./personas.router.v2');
 const articulosRouter = require('./articulos.router');
+const categoriasRouter = require('./categorias.router');
 
 function routerApp(app) {
 
@@ -17,9 +18,11 @@ function routerApp(app) {
   // ruteos de v1
   routerV1.use('/personas', personasRouter);
   routerV1.use('/articulos', articulosRouter);
+  routerV1.use('/categorias', categoriasRouter);
 
   // ruteos de v2
   routerV2.use('/personas', personasRouterV2);
+
 }
 
 module.exports = routerApp;

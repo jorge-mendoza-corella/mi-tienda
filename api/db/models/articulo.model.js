@@ -1,4 +1,5 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
+const { CATEGORIA_TABLE } = require('./categoria.model');
 
 const ARTICULO_TABLE = 'articulos';
 
@@ -27,6 +28,18 @@ const ArticuloSchema = {
     type: DataTypes.DOUBLE,
     defaultValue: 0
   },
+  categoriaId: {
+    field: 'categoria_id',
+    allowNull: false,
+    unique: true,
+    type: DataTypes.UUID,
+    references: {
+      model: CATEGORIA_TABLE,
+      key: 'id'
+    },
+    onUpdate: 'CASCADE',
+    onDelete: 'SET NULL'
+  },
   createAt: {
     allowNull: false,
     type: DataTypes.DATE,
@@ -36,8 +49,9 @@ const ArticuloSchema = {
 }
 
 class Articulo extends Model {
-  static associate() {
-    //algo
+
+  static associate(models) {
+    this.belongsTo(models.Categoria, { as: 'categoria' });
   }
 
   static config(sequelize) {

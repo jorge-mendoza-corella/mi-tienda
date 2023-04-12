@@ -1,0 +1,9 @@
+Crear en: /api/db/models el muevo modelo
+Crear en: /api/schemas el nuevo schema de validacion
+Crear en: /api/services el nuevo servicio
+Crear en: /api/routes el nuevo ruteador
+Actualizar en: api/routes/index.js agregar el nuevo ruteador creado
+Actualizar en: api/db/models/index.js agregar el nuevo schema
+-- correr el npm run migrations:generate nueva_migracion
+Una vez se cree el: /api/db/migrations/nueva_migracion, hay que agregarle la nueva tabla y su revert
+

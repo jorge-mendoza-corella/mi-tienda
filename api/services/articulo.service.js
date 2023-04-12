@@ -34,22 +34,28 @@ class ArticuloService {
 
   // ESTO LO HAGO CON SERIALIZACION (ORM)
   async create(data) {
-    const nuevaArticulo = await models.Articulo.create(data);
+    const nuevaArticulo = await models.Articulo.create(data,{
+      include: ['categoria']
+    });
     return nuevaArticulo;
   }
 
   // ESTO LO HAGO CON SERIALIZACION (ORM) O POR UNA CONSULTA DIRECTA CONECTADO POR POOL
   async find(next) {
-    //  const articulos = await models.Articulo.findAll();
-    const query = 'SELECT * FROM ARTICULOS where c=1';
-    const articulos = await resultFromQuery(this.pool, query, null, true, next);
+    const articulos = await models.Articulo.findAll({
+      include: ['categoria']
+    });
+    // const query = 'SELECT * FROM ARTICULOS where c=1';
+    // const articulos = await resultFromQuery(this.pool, query, null, true, next);
 
     return articulos;
   }
 
   // ESTO LO HAGO CON SERIALIZACION (ORM)
   async findOne(id) {
-    const articulos = await models.Articulo.findByPk(id);
+    const articulos = await models.Articulo.findByPk(id,{
+      include: ['categoria']
+    });
     if (!articulos) {
       throw boom.notFound('Articulo no encontrado');
     }
