@@ -14,10 +14,10 @@ function requestHandlerGet(servicio, funcion) {
 }
 
 
-function requestHandlerGetOne(servicio, funcion, property, statusCode) {
+function requestHandlerGetOne(servicio, funcion, statusCode) {
   return async (req, res, next) => {
     try {
-      const { id } = req[property];
+      const { id } = req['params'];
       const elemento = await servicio[funcion](id, next);
       res.status(statusCode).json(elemento);
     } catch (error) {
@@ -27,14 +27,14 @@ function requestHandlerGetOne(servicio, funcion, property, statusCode) {
 }
 
 
-function requestHandlerAction(servicio, funcion, property, statusCode, mensaje, next) {
+function requestHandlerAction(servicio, funcion, statusCode, mensaje) {
   return async (req, res, next) => {
     try {
-      const [body, params] = property.split(',');
-
-      // si existen los elementos, asigno el valor desde el req, y si no solo ''
-      const { id } = params ? req[params] : '';
-      const elemento = body ? req[body] : '';
+      // busco en el params y en el body del request, si existen los elementos, asigno el valor desde el req, y si no solo ''
+      const { id } = req['params'] ? req['params'] : '';
+      const elemento = req['body'] ? req['body'] : '';
+      console.log('ID ' + id);
+      console.log('elemento ' + JSON.stringify(elemento));
 
       // Función que busca el objeto anidado
       const buscarObjetoAnidado = (objeto) => {
@@ -62,19 +62,19 @@ function requestHandlerAction(servicio, funcion, property, statusCode, mensaje, 
 
 
       // este es el resultado final de cualquier accion
-      let e;
+      let resultadoFinal;
 
-      // si existen elementos body y params, entonces mando los dos parametros en la funcion dinamica
-      if (body && params)
-        e = await servicio[funcion](id, elemento, next); // para update
-      else if (body)// si existe el elemento body, entonces mando solo el parametro de body en la funcion dinamica
-        e = await servicio[funcion](elemento, next); //para create
-      else // si existe el elemento params, entonces mando solo el parametro de params en la funcion dinamica
-        e = await servicio[funcion](id, next); // para delete
+      // si existen elementos en body y en params, entonces mando los dos parametros en la funcion dinamica
+      if (elemento && id)
+        resultadoFinal = await servicio[funcion](id, elemento, next); // para update
+      else if (elemento)// si existe el elemento en el body, entonces mando solo el parametro de body en la funcion dinamica
+        resultadoFinal = await servicio[funcion](elemento, next); //para create
+      else // si existe el elemento en params, entonces mando solo el parametro de params en la funcion dinamica
+        resultadoFinal = await servicio[funcion](id, next); // para delete
 
       res.status(statusCode).json({
         message: mensaje,
-        elemento: e
+        elemento: resultadoFinal
       })
     } catch (error) {
       next(error);
