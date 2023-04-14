@@ -1,5 +1,4 @@
 const faker = require('faker');
-const { v4: uuidv4, validate: uuidValidate } = require('uuid');
 const {ArticuloSchema,} = require('./../db/models/articulo.model');
 const {CategoriaSchema,} = require('./../db/models/categoria.model');
 
@@ -45,14 +44,6 @@ function requestHandlerAction(servicio, funcion, statusCode, mensaje) {
         });
         return objetosAnidadosEncontrados;
       };
-
-      // valida si el tipo de un elemento es de tipo UUID
-/*       const esUUID = (valor) => {
-        if (typeof valor !== 'string') {
-          return false; // No es una cadena de texto
-        }
-        return uuidValidate(valor);
-      }; */
 
       // Obtenemos el nombre de la función constructora del prototipo
       // y obtenemos el nombre solo del elemento que se esta usando
