@@ -1,6 +1,8 @@
 const faker = require('faker');
 const {ArticuloSchema,} = require('./../db/models/articulo.model');
 const {CategoriaSchema,} = require('./../db/models/categoria.model');
+const {AnimalSchema,} = require('./../db/models/animal.model');
+const {EspecieiaSchema,} = require('./../db/models/especie.model');
 
 function requestHandlerGet(servicio, funcion) {
   return async (req, res, next) => {
