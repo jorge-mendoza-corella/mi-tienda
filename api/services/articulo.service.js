@@ -34,7 +34,7 @@ class ArticuloService {
 
   // ESTO LO HAGO CON SERIALIZACION (ORM)
   async create(data) {
-    const nuevaArticulo = await models.Articulo.create(data,{
+    const nuevaArticulo = await models.Articulo.create(data, {
       include: ['categoria']
     });
     return nuevaArticulo;
@@ -53,7 +53,7 @@ class ArticuloService {
 
   // ESTO LO HAGO CON SERIALIZACION (ORM)
   async findOne(id) {
-    const articulos = await models.Articulo.findByPk(id,{
+    const articulos = await models.Articulo.findByPk(id, {
       include: ['categoria']
     });
     if (!articulos) {
@@ -66,6 +66,10 @@ class ArticuloService {
   async update(id, cambios) {
     const articulo = await this.findOne(id);
     const resp = await articulo.update(cambios);
+
+    // Recargar la instancia del original para obtener los datos actualizados
+    await resp.reload();
+
     return resp;
   }
 

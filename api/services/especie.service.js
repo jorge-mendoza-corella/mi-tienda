@@ -35,11 +35,11 @@ class EspecieService {
 
   // ESTO LO HAGO CON SERIALIZACION (ORM)
   async findOne(id) {
-    const especies = await models.Especie.findByPk(id,{
+    const especies = await models.Especie.findByPk(id, {
       include: ['animales']
     });
     if (!especies) {
-      throw boom.notFound('especie no encontrada');
+      throw boom.notFound('Especie no encontrada');
     }
     return especies;
   }
@@ -48,6 +48,10 @@ class EspecieService {
   async update(id, cambios) {
     const especie = await this.findOne(id);
     const resp = await especie.update(cambios);
+
+    // Recargar la instancia del original para obtener los datos actualizados
+    await resp.reload();
+
     return resp;
   }
 

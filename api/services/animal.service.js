@@ -39,7 +39,7 @@ class AnimalService {
       include: ['especie']
     });
     if (!animals) {
-      throw boom.notFound('animal no encontrado');
+      throw boom.notFound('Animal no encontrado');
     }
     return animals;
   }
@@ -48,6 +48,10 @@ class AnimalService {
   async update(id, cambios) {
     const animal = await this.findOne(id);
     const resp = await animal.update(cambios);
+
+    // Recargar la instancia del original para obtener los datos actualizados
+    await resp.reload();
+
     return resp;
   }
 

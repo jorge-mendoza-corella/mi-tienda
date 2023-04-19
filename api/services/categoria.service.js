@@ -50,7 +50,7 @@ class CategoriaService {
 
   // ESTO LO HAGO CON SERIALIZACION (ORM)
   async findOne(id) {
-    const categorias = await models.Categoria.findByPk(id,{
+    const categorias = await models.Categoria.findByPk(id, {
       include: ['articulo']
     });
     if (!categorias) {
@@ -63,6 +63,10 @@ class CategoriaService {
   async update(id, cambios) {
     const categorias = await this.findOne(id);
     const resp = await categorias.update(cambios);
+
+    // Recargar la instancia del original para obtener los datos actualizados
+    await resp.reload();
+
     return resp;
   }
 

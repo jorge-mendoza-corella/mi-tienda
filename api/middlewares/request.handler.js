@@ -1,8 +1,8 @@
 const faker = require('faker');
-const {ArticuloSchema,} = require('./../db/models/articulo.model');
-const {CategoriaSchema,} = require('./../db/models/categoria.model');
-const {AnimalSchema,} = require('./../db/models/animal.model');
-const {EspecieiaSchema,} = require('./../db/models/especie.model');
+const { ArticuloSchema, } = require('./../db/models/articulo.model');
+const { CategoriaSchema, } = require('./../db/models/categoria.model');
+const { AnimalSchema, } = require('./../db/models/animal.model');
+const { EspecieSchema, } = require('./../db/models/especie.model');
 
 function requestHandlerGet(servicio, funcion) {
   return async (req, res, next) => {
@@ -37,34 +37,37 @@ function requestHandlerAction(servicio, funcion, statusCode, mensaje) {
       const elementoBody = req['body'] ? req['body'] : '';
 
       // Función que busca todos los objetos anidados
-      const buscarObjetoAnidado = (objeto) => {
-        let objetosAnidadosEncontrados = [];
-        Object.values(objeto).forEach(valor => {
-          if (typeof valor === 'object' && valor !== null) {
-            objetosAnidadosEncontrados.push(valor);
+      const buscarObjetoAnidado = (objetoPrincipal) => {
+        let objetosAnidadosEncontrados = {};
+
+        for (const key in objetoPrincipal) {
+          if (typeof objetoPrincipal[key] === 'object') {
+            // ahora para cada elemento anidado le pego un uuid generado desde faker,
+            // para su elemento id si es de tipo UUID
+            const nombreSchema =  key.charAt(0).toUpperCase() + key.slice(1) + "Schema";
+            if (eval(nombreSchema).id.type.key == 'UUID')
+              objetoPrincipal[key].id = faker.datatype.uuid();
+
+            // agrego el elemento anidado
+            objetosAnidadosEncontrados[key] = objetoPrincipal[key];
           }
-        });
+        }
         return objetosAnidadosEncontrados;
       };
 
-      // Obtenemos el nombre de la función constructora del prototipo
+      // Obtenemos el nombre de la función constructora del prototipo padre
       // y obtenemos el nombre solo del elemento que se esta usando
       const nombreElemento = Object.getPrototypeOf(servicio).constructor.name
         .slice(0, Object.getPrototypeOf(servicio).constructor.name.indexOf('Service'));
 
       // Obtener el objeto anidado
       let elementosAnidados = buscarObjetoAnidado(elementoBody);
+      const nombreSchema = nombreElemento + "Schema";
 
-      // le pego al elemento un uuid generado desde faker
-      elementoBody.id = faker.datatype.uuid();
-
-      // para todos los elementos anidados les pego un uuid generado desde faker,
+      // le pego al elemento padre un uuid generado desde faker
       // para su elemento id si es de tipo UUID
-      elementosAnidados.forEach(elemento => {
-        const nombreSchema = nombreElemento + "Schema";
-        if (eval(nombreSchema).id.type.key == 'UUID')
-          elemento.id = faker.datatype.uuid();
-      });
+      if (eval(nombreSchema).id.type.key == 'UUID')
+        elementoBody.id = faker.datatype.uuid();
 
       // este es el resultado final de cualquier accion
       let resultadoFinal;
