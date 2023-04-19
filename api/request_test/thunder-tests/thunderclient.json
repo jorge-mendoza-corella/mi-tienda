@@ -1,0 +1,35 @@
+[
+  {
+    "_id": "b4fdf923-e714-4716-a3d3-7a6487dfb49e",
+    "colId": "42802170-ea87-4b8d-bfd4-a1e1b90a1ac2",
+    "containerId": "",
+    "name": "Get animales",
+    "url": "{{host}}v2/animales",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2023-04-19T02:58:23.807Z",
+    "modified": "2023-04-19T03:00:11.654Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "4a534c1a-c9d5-4892-b648-5a1bc63223e6",
+    "colId": "42802170-ea87-4b8d-bfd4-a1e1b90a1ac2",
+    "containerId": "",
+    "name": "Crear animales",
+    "url": "{{host}}v2/animales",
+    "method": "POST",
+    "sortNum": 20000,
+    "created": "2023-04-19T03:03:13.888Z",
+    "modified": "2023-04-19T03:04:30.964Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "    {\r\n        \"nombre\": \"Gatos\",\r\n        \"numeroPatas\": \"4\",\r\n        \"color\":\"amarillo\",\r\n        \"especieId\":4\r\n    }",
+      "form": []
+    },
+    "tests": []
+  }
+]

@@ -1,0 +1,6 @@
+{
+    "thunder-client.saveToWorkspace": true,
+    "thunder-client.workspaceRelativePath": "api/request_test",
+    "thunder-client.autoRunCurl": false,
+    "thunder-client.defaultUrl": "https://localhost:3000/"
+}
