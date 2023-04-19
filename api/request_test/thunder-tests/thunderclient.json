@@ -31,5 +31,43 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "9ad67b85-1d09-4909-91bd-61237ac351aa",
+    "colId": "42802170-ea87-4b8d-bfd4-a1e1b90a1ac2",
+    "containerId": "",
+    "name": "Update animales",
+    "url": "{{host}}v2/animales/4",
+    "method": "PUT",
+    "sortNum": 30000,
+    "created": "2023-04-19T03:08:45.224Z",
+    "modified": "2023-04-19T03:08:45.224Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "    {\r\n        \"nombre\": \"Puerquito\",\r\n        \"numeroPatas\": \"4\",\r\n        \"color\":\"rojas\",\r\n        \"especieId\":5\r\n    }",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "5c9e549d-948b-40ce-85fc-a3ed797ef3d3",
+    "colId": "42802170-ea87-4b8d-bfd4-a1e1b90a1ac2",
+    "containerId": "",
+    "name": "Update parcial animales",
+    "url": "{{host}}v2/animales/4",
+    "method": "PATCH",
+    "sortNum": 40000,
+    "created": "2023-04-19T03:09:24.741Z",
+    "modified": "2023-04-19T03:10:04.106Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "    {\r\n        \"nombre\": \"Puercoteeeee\",\r\n        \"especieId\": 4\r\n    }",
+      "form": []
+    },
+    "tests": []
   }
 ]
