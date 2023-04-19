@@ -1,22 +1,14 @@
 const express = require('express');
-const PersonaService = require('../services/persona.service');
+const EspecieService = require('../services/especie.service');
 const validatorHandler = require('../middlewares/validator.handler');
 const { requestHandlerGet, requestHandlerGetOne, requestHandlerAction } = require('../middlewares/request.handler');
-const { createPersonaSchema, updatePersonaSchema, getPersonaSchema } = require('../schemas/persona.schema');
+const { createEspecieSchema, updateEspecieSchema, getEspecieSchema } = require('../schemas/especie.schema');
 
-
-// esta es la version 2 de este router, voy a hacerle cambios para que se tengan las dos versiones por un tiempo
-
-// genero un router
+// genero un router, argego una jalada
 const router = express.Router();
 
 // instancio el servicio
-const servicio = PersonaService.getInstance();
-
-// cuando hay un nivel de ruta que con¿incide con otro, hay que poner antes el que es especifico para que no choquen
-router.get('/filtro', async (req, res) => {
-  res.send('Estoy en un filtro V2');
-});
+const servicio = EspecieService.getInstance();
 
 // regresa los elementos especificos dependiendo de los filtros como query(?)
 router.get('/',
@@ -27,45 +19,46 @@ router.get('/',
 
 // cuando hay un nivel de ruta que con¿incide con otro, hay que poner antes el que es especifico para que no choquen
 router.get('/filtro', async (req, res) => {
-  res.send('Estoy en un filtro de Personas');
+  res.send('Estoy en un filtro de Especies');
 });
 
 
 // regresa el elemento especifico, dependiendo del filtro(especifico)
 router.get('/:id',
   // middlewares:
-  validatorHandler(getPersonaSchema, 'params'), // para validar la info que llega en params (id)
+  validatorHandler(getEspecieSchema, 'params'), // para validar la info que llega en params (id)
   requestHandlerGetOne(servicio, 'findOne', 200),  // para enviar el request y/o capturar errores
 );
 
 
-// crea Persona
+// crea Especie
 router.post('/',
-  validatorHandler(createPersonaSchema, 'body'), // para validar la info que llega en body (elemento)
+  validatorHandler(createEspecieSchema, 'body'), // para validar la info que llega en body (elemento)
   requestHandlerAction(servicio, 'create', 201, 'Creado') // para enviar el request y/o capturar errores
 );
 
 
-// update partial Persona
+// update partial Especie
 router.patch('/:id',
-  validatorHandler(getPersonaSchema, 'params'), // para validar la info que llega en params (id)
-  validatorHandler(updatePersonaSchema, 'body'), // para validar la info que llega en body (elemento)
+  validatorHandler(getEspecieSchema, 'params'), // para validar la info que llega en params (id)
+  validatorHandler(updateEspecieSchema, 'body'), // para validar la info que llega en body (elemento)
   requestHandlerAction(servicio, 'update', 200, 'Actualizado solo unos campos') // para enviar el request y/o capturar errores
 );
 
-// update Persona
+// update Especie
 router.put('/:id',
-  validatorHandler(getPersonaSchema, 'params'), // para validar la info que llega en params (id)
-  validatorHandler(updatePersonaSchema, 'body'), // para validar la info que llega en body (elemento)
+  validatorHandler(getEspecieSchema, 'params'), // para validar la info que llega en params (id)
+  validatorHandler(updateEspecieSchema, 'body'), // para validar la info que llega en body (elemento)
   requestHandlerAction(servicio, 'update', 200, 'Actualizado completo') // para enviar el request y/o capturar errores
 );
 
-// delete Persona
+// delete Especie
 router.delete('/:id',
-  validatorHandler(getPersonaSchema, 'params'), // para validar la info que llega en params (id)
+  validatorHandler(getEspecieSchema, 'params'), // para validar la info que llega en params (id)
   requestHandlerAction(servicio, 'delete', 200, 'Borrado') // para enviar el request y/o capturar errores
 
 );
+
 
 
 module.exports = router;
