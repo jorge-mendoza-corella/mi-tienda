@@ -3,6 +3,8 @@ const { ArticuloSchema, } = require('./../db/models/articulo.model');
 const { CategoriaSchema, } = require('./../db/models/categoria.model');
 const { AnimalSchema, } = require('./../db/models/animal.model');
 const { EspecieSchema, } = require('./../db/models/especie.model');
+const { RopaSchema, } = require('./../db/models/ropa.model');
+const { TipoRopaSchema, } = require('./../db/models/tipoRopa.model');
 
 function requestHandlerGet(servicio, funcion) {
   return async (req, res, next) => {
@@ -82,7 +84,7 @@ function requestHandlerAction(servicio, funcion, statusCode, mensaje) {
 
       res.status(statusCode).json({
         message: mensaje,
-        [nombreElemento.toLowerCase()]: resultadoFinal
+        [nombreElemento.charAt(0).toLowerCase() + nombreElemento.slice(1)]: resultadoFinal
       })
     } catch (error) {
       next(error);

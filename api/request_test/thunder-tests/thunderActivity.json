@@ -17,5 +17,19 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "6273ac40-927f-4c5a-b7c8-93be91dea455",
+    "colId": "history",
+    "containerId": "",
+    "name": "{{host}}",
+    "url": "{{host}}",
+    "method": "DELETE",
+    "sortNum": 0,
+    "created": "2023-04-20T00:53:12.702Z",
+    "modified": "2023-04-20T00:53:12.702Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]
