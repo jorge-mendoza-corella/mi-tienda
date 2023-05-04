@@ -4,6 +4,8 @@ const { Animal, AnimalSchema } = require('./animal.model');
 const { Especie, EspecieSchema } = require('./especie.model');
 const { Ropa, RopaSchema } = require('./ropa.model');
 const { TipoRopa, TipoRopaSchema } = require('./tipoRopa.model');
+const { Uno1, Uno1Schema } = require('./uno1.model');
+const { Uno2, Uno2Schema } = require('./uno2.model');
 
 
 function setupModels(sequelize) {
@@ -14,6 +16,8 @@ function setupModels(sequelize) {
   Especie.init(EspecieSchema, Especie.config(sequelize));
   Ropa.init(RopaSchema, Ropa.config(sequelize));
   TipoRopa.init(TipoRopaSchema, TipoRopa.config(sequelize));
+  Uno1.init(Uno1Schema, Uno1.config(sequelize));
+  Uno2.init(Uno2Schema, Uno2.config(sequelize));
 
   //Las asociaciones de las tablas
   Articulo.associate(sequelize.models);
@@ -22,6 +26,8 @@ function setupModels(sequelize) {
   TipoRopa.associate(sequelize.models);
   Animal.associate(sequelize.models);
   Especie.associate(sequelize.models);
+  Uno1.associate(sequelize.models);
+  Uno2.associate(sequelize.models);
 }
 
 
