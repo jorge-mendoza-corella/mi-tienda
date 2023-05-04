@@ -7,6 +7,8 @@ const animalesRouterV2 = require('./animales.router.v2');
 const especiesRouterV2 = require('./especies.router.v2');
 const ropasRouterV2 = require('./ropa.router.v2');
 const tiposRopaRouterV2 = require('./tipoRopa.router.v2');
+const uno1Router = require('./uno1.router');
+const uno2Router = require('./uno2.router');
 
 function routerApp(app) {
 
@@ -23,6 +25,8 @@ function routerApp(app) {
   routerV1.use('/personas', personasRouter);
   routerV1.use('/articulos', articulosRouter);
   routerV1.use('/categorias', categoriasRouter);
+  routerV1.use('/uno1', uno1Router);
+  routerV1.use('/uno2', uno2Router);
 
   // ruteos de v2
   routerV2.use('/personas', personasRouterV2);

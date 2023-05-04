@@ -5,6 +5,8 @@ const { AnimalSchema, } = require('./../db/models/animal.model');
 const { EspecieSchema, } = require('./../db/models/especie.model');
 const { RopaSchema, } = require('./../db/models/ropa.model');
 const { TipoRopaSchema, } = require('./../db/models/tipoRopa.model');
+const { Uno1Schema, } = require('./../db/models/uno1.model');
+const { Uno2Schema, } = require('./../db/models/uno2.model');
 
 function requestHandlerGet(servicio, funcion) {
   return async (req, res, next) => {

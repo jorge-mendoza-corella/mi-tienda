@@ -5,5 +5,12 @@
     "created": "2023-04-19T02:58:09.986Z",
     "sortNum": 10000,
     "folders": []
+  },
+  {
+    "_id": "47cb43dc-86f7-4445-bf09-4ebf672c2558",
+    "colName": "generica_asociaciones",
+    "created": "2023-05-04T04:34:31.284Z",
+    "sortNum": 20000,
+    "folders": []
   }
 ]
