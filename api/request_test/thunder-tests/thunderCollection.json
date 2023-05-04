@@ -8,9 +8,23 @@
   },
   {
     "_id": "47cb43dc-86f7-4445-bf09-4ebf672c2558",
-    "colName": "generica_asociaciones",
+    "colName": "asociacion_generica_1:1",
     "created": "2023-05-04T04:34:31.284Z",
     "sortNum": 20000,
+    "folders": []
+  },
+  {
+    "_id": "b5164655-b7fb-4c9a-aa44-b678956d3aca",
+    "colName": "asociacion_generica_1:m",
+    "created": "2023-05-04T17:32:37.871Z",
+    "sortNum": 30000,
+    "folders": []
+  },
+  {
+    "_id": "e8a617b2-ed7c-448a-92cf-d34a1f68b118",
+    "colName": "asociacion_generica_m:m",
+    "created": "2023-05-04T17:32:56.225Z",
+    "sortNum": 40000,
     "folders": []
   }
 ]

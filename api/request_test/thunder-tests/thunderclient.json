@@ -409,5 +409,175 @@
     "headers": [],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "d3b7a1d0-66be-4a39-9423-3d40d8da786e",
+    "colId": "b5164655-b7fb-4c9a-aa44-b678956d3aca",
+    "containerId": "",
+    "name": "Get muchos",
+    "url": "{{host}}v1/muchos",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2023-05-04T17:33:26.791Z",
+    "modified": "2023-05-04T17:37:46.981Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "71acce48-8adb-4e8a-a009-162f5b118a96",
+    "colId": "b5164655-b7fb-4c9a-aa44-b678956d3aca",
+    "containerId": "",
+    "name": "Get unos",
+    "url": "{{host}}v1/uno",
+    "method": "GET",
+    "sortNum": 20000,
+    "created": "2023-05-04T17:33:32.860Z",
+    "modified": "2023-05-04T17:38:13.773Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "68324562-0e8a-4719-98a4-e490c0aa7545",
+    "colId": "b5164655-b7fb-4c9a-aa44-b678956d3aca",
+    "containerId": "",
+    "name": "Crear muchos",
+    "url": "{{host}}v1/muchos",
+    "method": "POST",
+    "sortNum": 30000,
+    "created": "2023-05-04T17:33:52.240Z",
+    "modified": "2023-05-04T17:40:01.727Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "    {\n        \"nombre\": \"Camisa a cuadros3\",\n        \"color\":\"azules\",\n        \"unoId\":1\n    }",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "932cb28f-efc1-419c-b5f8-89c25a92518c",
+    "colId": "b5164655-b7fb-4c9a-aa44-b678956d3aca",
+    "containerId": "",
+    "name": "Crear unos",
+    "url": "{{host}}v1/uno",
+    "method": "POST",
+    "sortNum": 40000,
+    "created": "2023-05-04T17:33:56.391Z",
+    "modified": "2023-05-04T17:39:23.072Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "    {\n        \"nombre\": \"Calzones\"\n    }",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "e17c212b-a505-4cba-928c-7976f3662c80",
+    "colId": "b5164655-b7fb-4c9a-aa44-b678956d3aca",
+    "containerId": "",
+    "name": "Update muchos",
+    "url": "{{host}}v1/muchos/2",
+    "method": "PUT",
+    "sortNum": 60000,
+    "created": "2023-05-04T17:34:15.902Z",
+    "modified": "2023-05-04T17:41:42.872Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "    {\n        \"nombre\": \"algosss\",\n        \"unoId\":2\n    }",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "79b34009-b793-4d9a-b86c-827ab8c381ba",
+    "colId": "b5164655-b7fb-4c9a-aa44-b678956d3aca",
+    "containerId": "",
+    "name": "Update unos",
+    "url": "{{host}}v1/uno/2",
+    "method": "PUT",
+    "sortNum": 50000,
+    "created": "2023-05-04T17:34:20.009Z",
+    "modified": "2023-05-04T17:40:50.492Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "    {\n        \"nombre\": \"Playeras\"\n    }",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "8ba7a3d2-c398-4af8-a421-72dd8fb39057",
+    "colId": "b5164655-b7fb-4c9a-aa44-b678956d3aca",
+    "containerId": "",
+    "name": "Update parcial muchos",
+    "url": "{{host}}v1/muchos/4",
+    "method": "PATCH",
+    "sortNum": 70000,
+    "created": "2023-05-04T17:34:51.841Z",
+    "modified": "2023-05-04T17:42:12.257Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "    {\n        \"unoId\":2\n    }",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "966e1114-b456-43ce-9047-54b385a53e76",
+    "colId": "b5164655-b7fb-4c9a-aa44-b678956d3aca",
+    "containerId": "",
+    "name": "Update parcial unos",
+    "url": "{{host}}v1/uno/2",
+    "method": "PATCH",
+    "sortNum": 80000,
+    "created": "2023-05-04T17:34:54.923Z",
+    "modified": "2023-05-04T17:42:36.607Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "    {\n        \"nombre\": \"Pantaloncillos\"\n    }",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "8396cf5d-1ed0-4954-b649-cdfbfc8aa7e0",
+    "colId": "b5164655-b7fb-4c9a-aa44-b678956d3aca",
+    "containerId": "",
+    "name": "Delete muchos",
+    "url": "{{host}}v1/muchos/2",
+    "method": "DELETE",
+    "sortNum": 100000,
+    "created": "2023-05-04T17:35:04.153Z",
+    "modified": "2023-05-04T17:43:22.720Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "08668c70-316d-442b-9a59-fa41bb6b536b",
+    "colId": "b5164655-b7fb-4c9a-aa44-b678956d3aca",
+    "containerId": "",
+    "name": "Delete unos",
+    "url": "{{host}}v1/uno/2",
+    "method": "DELETE",
+    "sortNum": 90000,
+    "created": "2023-05-04T17:35:06.392Z",
+    "modified": "2023-05-04T17:43:08.152Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]
