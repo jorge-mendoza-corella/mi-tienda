@@ -1,0 +1,35 @@
+[
+  {
+    "_id": "400ab5ab-34c1-4ae9-90d8-346819752515",
+    "colId": "history",
+    "containerId": "",
+    "name": "{{host}}v2/animales/4",
+    "url": "{{host}}v2/animales/4",
+    "method": "PUT",
+    "sortNum": 0,
+    "created": "2023-04-19T03:08:07.871Z",
+    "modified": "2023-04-19T03:08:07.871Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "    {\r\n        \"nombre\": \"Puerquito\",\r\n        \"numeroPatas\": \"4\",\r\n        \"color\":\"rojas\",\r\n        \"especieId\":5\r\n    }",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "6273ac40-927f-4c5a-b7c8-93be91dea455",
+    "colId": "history",
+    "containerId": "",
+    "name": "{{host}}",
+    "url": "{{host}}",
+    "method": "DELETE",
+    "sortNum": 0,
+    "created": "2023-04-20T00:53:12.702Z",
+    "modified": "2023-04-20T00:53:12.702Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  }
+]

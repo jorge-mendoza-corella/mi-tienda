@@ -1,0 +1,243 @@
+[
+  {
+    "_id": "b4fdf923-e714-4716-a3d3-7a6487dfb49e",
+    "colId": "42802170-ea87-4b8d-bfd4-a1e1b90a1ac2",
+    "containerId": "",
+    "name": "Get animales",
+    "url": "{{host}}v2/animales",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2023-04-19T02:58:23.807Z",
+    "modified": "2023-04-19T03:00:11.654Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "4a534c1a-c9d5-4892-b648-5a1bc63223e6",
+    "colId": "42802170-ea87-4b8d-bfd4-a1e1b90a1ac2",
+    "containerId": "",
+    "name": "Crear animales",
+    "url": "{{host}}v2/animales",
+    "method": "POST",
+    "sortNum": 20000,
+    "created": "2023-04-19T03:03:13.888Z",
+    "modified": "2023-04-19T03:04:30.964Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "    {\r\n        \"nombre\": \"Gatos\",\r\n        \"numeroPatas\": \"4\",\r\n        \"color\":\"amarillo\",\r\n        \"especieId\":4\r\n    }",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "9ad67b85-1d09-4909-91bd-61237ac351aa",
+    "colId": "42802170-ea87-4b8d-bfd4-a1e1b90a1ac2",
+    "containerId": "",
+    "name": "Update animales",
+    "url": "{{host}}v2/animales/4",
+    "method": "PUT",
+    "sortNum": 30000,
+    "created": "2023-04-19T03:08:45.224Z",
+    "modified": "2023-04-19T03:08:45.224Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "    {\r\n        \"nombre\": \"Puerquito\",\r\n        \"numeroPatas\": \"4\",\r\n        \"color\":\"rojas\",\r\n        \"especieId\":5\r\n    }",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "5c9e549d-948b-40ce-85fc-a3ed797ef3d3",
+    "colId": "42802170-ea87-4b8d-bfd4-a1e1b90a1ac2",
+    "containerId": "",
+    "name": "Update parcial animales",
+    "url": "{{host}}v2/animales/4",
+    "method": "PATCH",
+    "sortNum": 40000,
+    "created": "2023-04-19T03:09:24.741Z",
+    "modified": "2023-04-19T03:10:04.106Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "    {\r\n        \"nombre\": \"Puercoteeeee\",\r\n        \"especieId\": 4\r\n    }",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "dda77566-01b5-4ad9-9e7d-691431da2b08",
+    "colId": "42802170-ea87-4b8d-bfd4-a1e1b90a1ac2",
+    "containerId": "",
+    "name": "Get ropas",
+    "url": "{{host}}v2/ropas",
+    "method": "GET",
+    "sortNum": 15000,
+    "created": "2023-04-20T00:49:52.457Z",
+    "modified": "2023-04-20T00:54:08.946Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "750b33e3-0b69-497e-9f2c-397b6f097b8f",
+    "colId": "42802170-ea87-4b8d-bfd4-a1e1b90a1ac2",
+    "containerId": "",
+    "name": "Get tipos ropa",
+    "url": "{{host}}v2/tipos-ropa/1",
+    "method": "GET",
+    "sortNum": 17500,
+    "created": "2023-04-20T00:49:58.581Z",
+    "modified": "2023-04-20T01:25:49.296Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "dab2438f-4b43-405f-a0d8-8f44dfae1611",
+    "colId": "42802170-ea87-4b8d-bfd4-a1e1b90a1ac2",
+    "containerId": "",
+    "name": "Crear ropas",
+    "url": "{{host}}v2/ropas",
+    "method": "POST",
+    "sortNum": 25000,
+    "created": "2023-04-20T00:50:01.132Z",
+    "modified": "2023-04-20T01:19:39.453Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "    {\n        \"nombre\": \"Camisa a cuadros\",\n        \"color\":\"azules\",\n        \"tipoRopaId\":3\n    }",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "870a33c6-c933-424b-821b-b323ca48a91c",
+    "colId": "42802170-ea87-4b8d-bfd4-a1e1b90a1ac2",
+    "containerId": "",
+    "name": "Crear tipos ropa",
+    "url": "{{host}}v2/tipos-ropa",
+    "method": "POST",
+    "sortNum": 27500,
+    "created": "2023-04-20T00:50:05.668Z",
+    "modified": "2023-04-20T01:31:26.558Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "    {\n        \"nombre\": \"Calcetines\"\n    }",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "966043c8-ca92-4410-9930-4b102af10519",
+    "colId": "42802170-ea87-4b8d-bfd4-a1e1b90a1ac2",
+    "containerId": "",
+    "name": "Update ropas",
+    "url": "{{host}}v2/ropas/1",
+    "method": "PUT",
+    "sortNum": 35000,
+    "created": "2023-04-20T00:50:09.124Z",
+    "modified": "2023-04-20T01:23:17.973Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "    {\n        \"nombre\": \"algosss\",\n        \"tipoRopaId\":1\n    }",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "a84dd5a0-ef98-4740-93bb-ccd9368c12d0",
+    "colId": "42802170-ea87-4b8d-bfd4-a1e1b90a1ac2",
+    "containerId": "",
+    "name": "Update tipos ropa",
+    "url": "{{host}}v2/tipos-ropa/4",
+    "method": "PUT",
+    "sortNum": 37500,
+    "created": "2023-04-20T00:50:11.909Z",
+    "modified": "2023-04-20T01:21:53.935Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "    {\n        \"nombre\": \"Playeras\"\n    }",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "12871484-c866-4bc2-8d24-221b20eaacb6",
+    "colId": "42802170-ea87-4b8d-bfd4-a1e1b90a1ac2",
+    "containerId": "",
+    "name": "Update parcial ropas",
+    "url": "{{host}}v2/ropas/4",
+    "method": "PATCH",
+    "sortNum": 50000,
+    "created": "2023-04-20T00:50:14.182Z",
+    "modified": "2023-04-20T01:24:18.734Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "    {\n        \"tipoRopaId\":1\n    }",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "bb5d420f-e9c5-449f-8bd4-0df95e985d50",
+    "colId": "42802170-ea87-4b8d-bfd4-a1e1b90a1ac2",
+    "containerId": "",
+    "name": "Update parcial tipos ropa",
+    "url": "{{host}}v2/tipos-ropa/2",
+    "method": "PATCH",
+    "sortNum": 60000,
+    "created": "2023-04-20T00:50:16.516Z",
+    "modified": "2023-04-20T01:24:57.445Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "    {\n        \"nombre\": \"Pantaloncillos\"\n    }",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "eddf3f95-44aa-44ed-b473-86f99dc660e2",
+    "colId": "42802170-ea87-4b8d-bfd4-a1e1b90a1ac2",
+    "containerId": "",
+    "name": "Delete ropas",
+    "url": "{{host}}v2/ropas/1",
+    "method": "DELETE",
+    "sortNum": 70000,
+    "created": "2023-04-20T00:53:22.876Z",
+    "modified": "2023-04-20T01:25:10.438Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "b4756683-8f3b-4eb3-94eb-134958e67c02",
+    "colId": "42802170-ea87-4b8d-bfd4-a1e1b90a1ac2",
+    "containerId": "",
+    "name": "Delete tipos ropa",
+    "url": "{{host}}v2/tipos-ropa/4",
+    "method": "DELETE",
+    "sortNum": 80000,
+    "created": "2023-04-20T00:53:43.043Z",
+    "modified": "2023-04-20T01:26:06.459Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  }
+]
