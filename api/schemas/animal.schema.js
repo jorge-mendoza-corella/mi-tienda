@@ -8,6 +8,9 @@ const imagen = Joi.string().uri({ scheme: ['http', 'https'] }).regex(/\.(jpg|jpe
 const especieId = Joi.number().integer();
 const color = Joi.string().min(5);
 
+const offset = Joi.number().integer();
+const limit = Joi.number().integer();
+
 const createAnimalSchema = Joi.object({
   nombre: nombre.required(),
   numeroPatas: numeroPatas.required(),
@@ -28,5 +31,9 @@ const getAnimalSchema = Joi.object({
   id: id.required()
 });
 
+const queryAnimalSchema = Joi.object({
+  offset: offset,
+  limit: limit
+});
 
-module.exports = {createAnimalSchema, updateAnimalSchema, getAnimalSchema}
+module.exports = {createAnimalSchema, updateAnimalSchema, getAnimalSchema, queryAnimalSchema}

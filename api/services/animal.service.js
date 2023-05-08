@@ -23,10 +23,17 @@ class AnimalService {
   }
 
   // ESTO LO HAGO CON SERIALIZACION (ORM) O POR UNA CONSULTA DIRECTA CONECTADO POR POOL
-  async find(next) {
-    const animals = await models.Animal.findAll({
+  async find(next,query) {
+    const options = {
       include: ['especie']
-    });
+    }
+    const { limit, offset } = query;
+    if (limit && offset) {
+      options.limit = limit;
+      options.offset = offset;
+    }
+
+    const animals = await models.Animal.findAll(options);
     // const query = 'SELECT * FROM animalS where c=1';
     // const animals = await resultFromQuery(this.pool, query, null, true, next);
 

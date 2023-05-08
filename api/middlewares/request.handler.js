@@ -13,7 +13,7 @@ const { MuchosSchema, } = require('./../db/models/muchos.model');
 function requestHandlerGet(servicio, funcion) {
   return async (req, res, next) => {
     try {
-      const elementos = await servicio[funcion](next);
+      const elementos = await servicio[funcion](next, req.query);
       res.json(elementos);
     } catch (error) {
       next(error);

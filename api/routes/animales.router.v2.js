@@ -2,7 +2,7 @@ const express = require('express');
 const AnimalService = require('../services/animal.service');
 const validatorHandler = require('../middlewares/validator.handler');
 const { requestHandlerGet, requestHandlerGetOne, requestHandlerAction } = require('../middlewares/request.handler');
-const { createAnimalSchema, updateAnimalSchema, getAnimalSchema } = require('../schemas/animal.schema');
+const { createAnimalSchema, updateAnimalSchema, getAnimalSchema, queryAnimalSchema } = require('../schemas/animal.schema');
 
 // genero un router, argego una jalada
 const router = express.Router();
@@ -13,6 +13,7 @@ const servicio = AnimalService.getInstance();
 // regresa los elementos especificos dependiendo de los filtros como query(?)
 router.get('/',
   // middlewares:
+  validatorHandler(queryAnimalSchema, 'query'),
   requestHandlerGet(servicio, 'find'), // para validar la info que llega
 );
 

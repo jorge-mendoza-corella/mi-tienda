@@ -4,13 +4,24 @@
     "colId": "42802170-ea87-4b8d-bfd4-a1e1b90a1ac2",
     "containerId": "",
     "name": "Get animales",
-    "url": "{{host}}v2/animales",
+    "url": "{{host}}v2/animales?limit=1&offset=0",
     "method": "GET",
     "sortNum": 10000,
     "created": "2023-04-19T02:58:23.807Z",
-    "modified": "2023-04-19T03:00:11.654Z",
+    "modified": "2023-05-08T23:23:34.519Z",
     "headers": [],
-    "params": [],
+    "params": [
+      {
+        "name": "limit",
+        "value": "1",
+        "isPath": false
+      },
+      {
+        "name": "offset",
+        "value": "0",
+        "isPath": false
+      }
+    ],
     "tests": []
   },
   {
@@ -22,12 +33,12 @@
     "method": "POST",
     "sortNum": 20000,
     "created": "2023-04-19T03:03:13.888Z",
-    "modified": "2023-04-19T03:04:30.964Z",
+    "modified": "2023-05-08T22:59:41.261Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "    {\r\n        \"nombre\": \"Gatos\",\r\n        \"numeroPatas\": \"4\",\r\n        \"color\":\"amarillo\",\r\n        \"especieId\":4\r\n    }",
+      "raw": "    {\n        \"nombre\": \"Jirafas\",\n        \"numeroPatas\": \"4\",\n        \"color\":\"amarillo\",\n        \"especieId\":4\n    }",
       "form": []
     },
     "tests": []
@@ -75,13 +86,24 @@
     "colId": "42802170-ea87-4b8d-bfd4-a1e1b90a1ac2",
     "containerId": "",
     "name": "Get ropas",
-    "url": "{{host}}v2/ropas",
+    "url": "{{host}}v2/ropas?limit=2&offset=0",
     "method": "GET",
     "sortNum": 15000,
     "created": "2023-04-20T00:49:52.457Z",
-    "modified": "2023-04-20T00:54:08.946Z",
+    "modified": "2023-05-08T23:24:16.534Z",
     "headers": [],
-    "params": [],
+    "params": [
+      {
+        "name": "limit",
+        "value": "2",
+        "isPath": false
+      },
+      {
+        "name": "offset",
+        "value": "0",
+        "isPath": false
+      }
+    ],
     "tests": []
   },
   {
