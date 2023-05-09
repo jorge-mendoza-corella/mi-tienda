@@ -2,6 +2,7 @@ const faker = require('faker');
 const boom = require('@hapi/boom');
 const resultFromQuery = require('../utilities/acciones.db');
 const { models } = require('../libs/sequelize');
+const SolicitudesApiExternaService = require('./solicitudesApiExternas.service');
 
 class AnimalService {
 
@@ -23,7 +24,7 @@ class AnimalService {
   }
 
   // ESTO LO HAGO CON SERIALIZACION (ORM) O POR UNA CONSULTA DIRECTA CONECTADO POR POOL
-  async find(next,query) {
+  async find(next, query) {
     const options = {
       include: ['especie']
     }
@@ -68,6 +69,22 @@ class AnimalService {
     await animal.destroy();
     return { id };
   }
-}
 
+  // obtiene informacion de los gatitos desde una API externa
+  async obtenerGatitos() {
+    try {
+      const url = 'https://api.thecatapi.com/v1/images/search?limit=10';
+      const token = 'live_exencBgulCbY3CmkbwcYrhhl3TGzGbY693EpggohuBy0peITJCo73aE2TTWxtAmf';
+
+      const gatitosService = SolicitudesApiExternaService.getInstance();
+      const gatitos = await gatitosService.hacerSolicitud(url, token);
+
+      return gatitos;
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+}
 module.exports = AnimalService;

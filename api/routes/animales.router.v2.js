@@ -23,6 +23,19 @@ router.get('/filtro', async (req, res) => {
   res.send('Estoy en un filtro de Animals');
 });
 
+// obtener Gatitos
+router.get('/gatitos',
+  async (req, res, next) => {
+    try {
+      const gatitos = await servicio.obtenerGatitos();
+
+      res.status(200).json(gatitos);
+    } catch (error) {
+      next(error);
+    }
+  }
+  //requestHandlerAction(servicio, 'obtenerGatitos', 200, 'Resultaro') // para enviar el request y/o capturar errores
+);
 
 // regresa el elemento especifico, dependiendo del filtro(especifico)
 router.get('/:id',
@@ -59,7 +72,5 @@ router.delete('/:id',
   requestHandlerAction(servicio, 'delete', 200, 'Borrado') // para enviar el request y/o capturar errores
 
 );
-
-
 
 module.exports = router;
