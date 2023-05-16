@@ -22,6 +22,10 @@ const UserSchema = {
     allowNull: false,
     type: DataTypes.TEXT
   },
+  role: {
+    allowNull: true,
+    type: DataTypes.TEXT
+  },
   createAt: {
     allowNull: false,
     type: DataTypes.DATE,
