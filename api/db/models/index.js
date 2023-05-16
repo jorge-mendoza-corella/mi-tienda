@@ -8,6 +8,7 @@ const { Uno1, Uno1Schema } = require('./uno1.model');
 const { Uno2, Uno2Schema } = require('./uno2.model');
 const { Uno, UnoSchema } = require('./uno.model');
 const { Muchos, MuchosSchema } = require('./muchos.model');
+const { User, UserSchema } = require('./user.model');
 
 function setupModels(sequelize) {
   //Las tablas
@@ -21,6 +22,7 @@ function setupModels(sequelize) {
   Uno2.init(Uno2Schema, Uno2.config(sequelize));
   Uno.init(UnoSchema, Uno.config(sequelize));
   Muchos.init(MuchosSchema, Muchos.config(sequelize));
+  User.init(UserSchema, User.config(sequelize));
 
   //Las asociaciones de las tablas
   Articulo.associate(sequelize.models);

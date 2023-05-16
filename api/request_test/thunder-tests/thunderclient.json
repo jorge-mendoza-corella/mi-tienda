@@ -601,5 +601,90 @@
     "headers": [],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "4b92020b-35e5-4f50-88c1-c07853167996",
+    "colId": "a282a801-d87e-42bc-bc34-15cdf6fdcc5b",
+    "containerId": "",
+    "name": "Get user",
+    "url": "{{host}}v2/user/",
+    "method": "GET",
+    "sortNum": 5000,
+    "created": "2023-05-16T18:43:59.858Z",
+    "modified": "2023-05-16T18:58:48.179Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "231f0e9d-5065-4be6-85a7-5d5ab0ab47a7",
+    "colId": "a282a801-d87e-42bc-bc34-15cdf6fdcc5b",
+    "containerId": "",
+    "name": "Crear user",
+    "url": "{{host}}v2/user",
+    "method": "POST",
+    "sortNum": 7500,
+    "created": "2023-05-16T18:44:03.567Z",
+    "modified": "2023-05-16T18:58:58.706Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "    {\n        \"nombre\": \"CUATRO\",\n        \"email\":\"correo4@yopmail.com\",\n        \"password\":\"123456\"\n    }",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "61a96afe-aae8-450a-b5dd-3f4b2651e55f",
+    "colId": "a282a801-d87e-42bc-bc34-15cdf6fdcc5b",
+    "containerId": "",
+    "name": "Update user",
+    "url": "{{host}}v2/user/3",
+    "method": "PUT",
+    "sortNum": 8750,
+    "created": "2023-05-16T18:44:06.816Z",
+    "modified": "2023-05-16T18:58:04.362Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "    {\n        \"nombre\": \"TRES \",\n        \"email\":\"correo3@yopmail.com\",\n        \"password\":\"123456\"\n    }",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "f9a8666c-d56e-4f10-a7d7-c9183924e557",
+    "colId": "a282a801-d87e-42bc-bc34-15cdf6fdcc5b",
+    "containerId": "",
+    "name": "Update parcial user",
+    "url": "{{host}}v2/user/3",
+    "method": "PATCH",
+    "sortNum": 9375,
+    "created": "2023-05-16T18:44:12.265Z",
+    "modified": "2023-05-16T18:58:33.406Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "    {\n        \"email\":\"correo33@yopmail.com\",\n        \"password\":\"123456\"\n    }",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "b4b08d53-41c4-46da-86d5-2bba45d0bc95",
+    "colId": "a282a801-d87e-42bc-bc34-15cdf6fdcc5b",
+    "containerId": "",
+    "name": "Delete user",
+    "url": "{{host}}v2/user/3",
+    "method": "DELETE",
+    "sortNum": 10000,
+    "created": "2023-05-16T18:44:16.424Z",
+    "modified": "2023-05-16T18:58:41.519Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]

@@ -9,6 +9,7 @@ const { Uno1Schema, } = require('./../db/models/uno1.model');
 const { Uno2Schema, } = require('./../db/models/uno2.model');
 const { UnoSchema, } = require('./../db/models/uno.model');
 const { MuchosSchema, } = require('./../db/models/muchos.model');
+const { UserSchema, } = require('./../db/models/user.model');
 
 function requestHandlerGet(servicio, funcion) {
   return async (req, res, next) => {

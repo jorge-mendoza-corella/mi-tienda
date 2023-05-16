@@ -11,6 +11,7 @@ const uno1Router = require('./uno1.router');
 const uno2Router = require('./uno2.router');
 const unoRouter = require('./uno.router');
 const muchosRouter = require('./muchos.router');
+const userRouter = require('./user.router.v2');
 
 function routerApp(app) {
 
@@ -38,6 +39,7 @@ function routerApp(app) {
   routerV2.use('/especies', especiesRouterV2);
   routerV2.use('/ropas', ropasRouterV2);
   routerV2.use('/tipos-ropa', tiposRopaRouterV2);
+  routerV2.use('/user', userRouter);
 
 }
 
