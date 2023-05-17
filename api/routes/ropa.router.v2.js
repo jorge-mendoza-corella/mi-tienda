@@ -3,6 +3,8 @@ const RopaService = require('../services/ropa.service');
 const validatorHandler = require('../middlewares/validator.handler');
 const { requestHandlerGet, requestHandlerGetOne, requestHandlerAction } = require('../middlewares/request.handler');
 const { createRopaSchema, updateRopaSchema, getRopaSchema } = require('../schemas/ropa.schema');
+const passport = require('passport');
+const {checkRoles} = require('./../middlewares/auth.handler');
 
 // genero un router, argego una jalada
 const router = express.Router();
@@ -33,6 +35,8 @@ router.get('/:id',
 
 // crea Ropa
 router.post('/',
+  passport.authenticate('jwt', { session: false }),
+  checkRoles('admin'),
   validatorHandler(createRopaSchema, 'body'), // para validar la info que llega en body (elemento)
   requestHandlerAction(servicio, 'create', 201, 'Creado') // para enviar el request y/o capturar errores
 );

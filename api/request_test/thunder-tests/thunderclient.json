@@ -129,13 +129,17 @@
     "method": "POST",
     "sortNum": 25000,
     "created": "2023-04-20T00:50:01.132Z",
-    "modified": "2023-04-20T01:19:39.453Z",
+    "modified": "2023-05-16T23:48:15.881Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "    {\n        \"nombre\": \"Camisa a cuadros\",\n        \"color\":\"azules\",\n        \"tipoRopaId\":3\n    }",
+      "raw": "    {\n        \"nombre\": \"Pantallas\",\n        \"color\":\"azules\",\n        \"tipoRopaId\":3\n    }",
       "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4NDI4MDg3Mn0.NcTCeYO60RLcKTuavobdlsGS_QZK7Z8xQ71G2wNLAP0"
     },
     "tests": []
   },
@@ -625,12 +629,12 @@
     "method": "POST",
     "sortNum": 7500,
     "created": "2023-05-16T18:44:03.567Z",
-    "modified": "2023-05-16T18:58:58.706Z",
+    "modified": "2023-05-16T19:23:18.755Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "    {\n        \"nombre\": \"CUATRO\",\n        \"email\":\"correo4@yopmail.com\",\n        \"password\":\"123456\"\n    }",
+      "raw": "    {\n        \"nombre\": \"SEIS6\",\n        \"email\":\"correo6@yopmail.com\",\n        \"password\":\"123456\",\n        \"role\":\"viewer\"\n    }",
       "form": []
     },
     "tests": []
@@ -640,16 +644,16 @@
     "colId": "a282a801-d87e-42bc-bc34-15cdf6fdcc5b",
     "containerId": "",
     "name": "Update user",
-    "url": "{{host}}v2/user/3",
+    "url": "{{host}}v2/user/1",
     "method": "PUT",
     "sortNum": 8750,
     "created": "2023-05-16T18:44:06.816Z",
-    "modified": "2023-05-16T18:58:04.362Z",
+    "modified": "2023-05-16T19:26:59.594Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "    {\n        \"nombre\": \"TRES \",\n        \"email\":\"correo3@yopmail.com\",\n        \"password\":\"123456\"\n    }",
+      "raw": "    {\n        \"nombre\": \"UNO11\",\n        \"email\":\"correo1@yopmail.com\",\n        \"password\":\"147258\"\n    }",
       "form": []
     },
     "tests": []
@@ -659,16 +663,16 @@
     "colId": "a282a801-d87e-42bc-bc34-15cdf6fdcc5b",
     "containerId": "",
     "name": "Update parcial user",
-    "url": "{{host}}v2/user/3",
+    "url": "{{host}}v2/user/5",
     "method": "PATCH",
     "sortNum": 9375,
     "created": "2023-05-16T18:44:12.265Z",
-    "modified": "2023-05-16T18:58:33.406Z",
+    "modified": "2023-05-16T19:27:42.995Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "    {\n        \"email\":\"correo33@yopmail.com\",\n        \"password\":\"123456\"\n    }",
+      "raw": "    {\n        \"password\":\"123456\"\n    }",
       "form": []
     },
     "tests": []
@@ -685,6 +689,25 @@
     "modified": "2023-05-16T18:58:41.519Z",
     "headers": [],
     "params": [],
+    "tests": []
+  },
+  {
+    "_id": "a5d2af6d-651a-4325-9694-b29073fecb4b",
+    "colId": "a282a801-d87e-42bc-bc34-15cdf6fdcc5b",
+    "containerId": "",
+    "name": "Login",
+    "url": "{{host}}v1/auth/login",
+    "method": "POST",
+    "sortNum": 8125,
+    "created": "2023-05-16T22:09:16.853Z",
+    "modified": "2023-05-16T23:47:52.176Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "    {\n        \"email\":\"correo2@yopmail.com\",\n        \"password\":\"123456\"\n    }",
+      "form": []
+    },
     "tests": []
   }
 ]

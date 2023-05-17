@@ -12,6 +12,7 @@ const uno2Router = require('./uno2.router');
 const unoRouter = require('./uno.router');
 const muchosRouter = require('./muchos.router');
 const userRouter = require('./user.router.v2');
+const authRouter = require('./auth.router');
 
 function routerApp(app) {
 
@@ -32,6 +33,7 @@ function routerApp(app) {
   routerV1.use('/uno2', uno2Router);
   routerV1.use('/uno', unoRouter);
   routerV1.use('/muchos', muchosRouter);
+  routerV1.use('/auth', authRouter);
 
   // ruteos de v2
   routerV2.use('/personas', personasRouterV2);

@@ -2,6 +2,7 @@ const faker = require('faker');
 const boom = require('@hapi/boom');
 const resultFromQuery = require('../utilities/acciones.db');
 const { models } = require('../libs/sequelize');
+const bcrypt = require('bcrypt');
 
 class UserService {
 
@@ -18,7 +19,12 @@ class UserService {
 
   // ESTO LO HAGO CON SERIALIZACION (ORM)
   async create(data) {
-    const nuevaUser = await models.User.create(data);
+    const hash = await bcrypt.hash(data.password, 10);
+    const nuevaUser = await models.User.create({
+      ...data,
+      password: hash
+    });
+    delete nuevaUser.dataValues.password;
     return nuevaUser;
   }
 
@@ -27,6 +33,14 @@ class UserService {
     const users = await models.User.findAll();
     // const query = 'SELECT * FROM UserS where c=1';
     // const Users = await resultFromQuery(this.pool, query, null, true, next);
+
+    return users;
+  }
+
+  async findByEmail(email) {
+    const users = await models.User.findOne({
+      where: { email }
+    });
 
     return users;
   }
@@ -43,10 +57,15 @@ class UserService {
   // ESTO LO HAGO CON SERIALIZACION (ORM)
   async update(id, cambios) {
     const user = await this.findOne(id);
-    const resp = await user.update(cambios);
+    const hash = await bcrypt.hash(user.password, 10);
+    const resp = await user.update({
+      ...cambios,
+      password: hash
+    });
 
     // Recargar la instancia del original para obtener los datos actualizados
     await resp.reload();
+    delete resp.dataValues.password;
 
     return resp;
   }

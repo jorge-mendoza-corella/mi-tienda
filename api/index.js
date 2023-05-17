@@ -13,6 +13,8 @@ app.get('/api/nueva-ruta', (req, res) => {
   res.send('hola esta es unua nueva ruta')
 })
 
+require('./utilities/auth')
+
 routerApp(app);
 app.use(logErrors);
 app.use(errorBoom);
